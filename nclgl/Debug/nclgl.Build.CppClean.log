@@ -1,30 +1,30 @@
-\\campus\home\home32\nwb13\desktop\csc3222 coursework\csc3222 coursework\nclgl\debug\nclgl.pdb
-\\campus\home\home32\nwb13\desktop\csc3222 coursework\csc3222 coursework\nclgl\debug\nclgl.idb
-\\campus\home\home32\nwb13\desktop\csc3222 coursework\csc3222 coursework\nclgl\debug\camera.obj
-\\campus\home\home32\nwb13\desktop\csc3222 coursework\csc3222 coursework\nclgl\debug\cuberobot.obj
-\\campus\home\home32\nwb13\desktop\csc3222 coursework\csc3222 coursework\nclgl\debug\frustum.obj
-\\campus\home\home32\nwb13\desktop\csc3222 coursework\csc3222 coursework\nclgl\debug\gametimer.obj
-\\campus\home\home32\nwb13\desktop\csc3222 coursework\csc3222 coursework\nclgl\debug\heightmap.obj
-\\campus\home\home32\nwb13\desktop\csc3222 coursework\csc3222 coursework\nclgl\debug\keyboard.obj
-\\campus\home\home32\nwb13\desktop\csc3222 coursework\csc3222 coursework\nclgl\debug\matrix4.obj
-\\campus\home\home32\nwb13\desktop\csc3222 coursework\csc3222 coursework\nclgl\debug\md5anim.obj
-\\campus\home\home32\nwb13\desktop\csc3222 coursework\csc3222 coursework\nclgl\debug\md5filedata.obj
-\\campus\home\home32\nwb13\desktop\csc3222 coursework\csc3222 coursework\nclgl\debug\md5mesh.obj
-\\campus\home\home32\nwb13\desktop\csc3222 coursework\csc3222 coursework\nclgl\debug\md5node.obj
-\\campus\home\home32\nwb13\desktop\csc3222 coursework\csc3222 coursework\nclgl\debug\mesh.obj
-\\campus\home\home32\nwb13\desktop\csc3222 coursework\csc3222 coursework\nclgl\debug\mouse.obj
-\\campus\home\home32\nwb13\desktop\csc3222 coursework\csc3222 coursework\nclgl\debug\objmesh.obj
-\\campus\home\home32\nwb13\desktop\csc3222 coursework\csc3222 coursework\nclgl\debug\oglrenderer.obj
-\\campus\home\home32\nwb13\desktop\csc3222 coursework\csc3222 coursework\nclgl\debug\plane.obj
-\\campus\home\home32\nwb13\desktop\csc3222 coursework\csc3222 coursework\nclgl\debug\quaternion.obj
-\\campus\home\home32\nwb13\desktop\csc3222 coursework\csc3222 coursework\nclgl\debug\scenenode.obj
-\\campus\home\home32\nwb13\desktop\csc3222 coursework\csc3222 coursework\nclgl\debug\shader.obj
-\\campus\home\home32\nwb13\desktop\csc3222 coursework\csc3222 coursework\nclgl\debug\window.obj
-\\campus\home\home32\nwb13\desktop\csc3222 coursework\csc3222 coursework\csc3222 coursework\debug\nclgl.lib
-\\campus\home\home32\nwb13\desktop\csc3222 coursework\csc3222 coursework\csc3222 coursework\debug\nclgl.pdb
-\\campus\home\home32\nwb13\desktop\csc3222 coursework\csc3222 coursework\nclgl\debug\nclgl.tlog\cl.command.1.tlog
-\\campus\home\home32\nwb13\desktop\csc3222 coursework\csc3222 coursework\nclgl\debug\nclgl.tlog\cl.read.1.tlog
-\\campus\home\home32\nwb13\desktop\csc3222 coursework\csc3222 coursework\nclgl\debug\nclgl.tlog\cl.write.1.tlog
-\\campus\home\home32\nwb13\desktop\csc3222 coursework\csc3222 coursework\nclgl\debug\nclgl.tlog\lib-link.read.1.tlog
-\\campus\home\home32\nwb13\desktop\csc3222 coursework\csc3222 coursework\nclgl\debug\nclgl.tlog\lib-link.write.1.tlog
-\\campus\home\home32\nwb13\desktop\csc3222 coursework\csc3222 coursework\nclgl\debug\nclgl.tlog\lib.command.1.tlog
+h:\githubvisualstudio\gamessimulation\nclgl\debug\nclgl.pdb
+h:\githubvisualstudio\gamessimulation\nclgl\debug\nclgl.idb
+h:\githubvisualstudio\gamessimulation\nclgl\debug\camera.obj
+h:\githubvisualstudio\gamessimulation\nclgl\debug\cuberobot.obj
+h:\githubvisualstudio\gamessimulation\nclgl\debug\frustum.obj
+h:\githubvisualstudio\gamessimulation\nclgl\debug\gametimer.obj
+h:\githubvisualstudio\gamessimulation\nclgl\debug\heightmap.obj
+h:\githubvisualstudio\gamessimulation\nclgl\debug\keyboard.obj
+h:\githubvisualstudio\gamessimulation\nclgl\debug\matrix4.obj
+h:\githubvisualstudio\gamessimulation\nclgl\debug\md5anim.obj
+h:\githubvisualstudio\gamessimulation\nclgl\debug\md5filedata.obj
+h:\githubvisualstudio\gamessimulation\nclgl\debug\md5mesh.obj
+h:\githubvisualstudio\gamessimulation\nclgl\debug\md5node.obj
+h:\githubvisualstudio\gamessimulation\nclgl\debug\mesh.obj
+h:\githubvisualstudio\gamessimulation\nclgl\debug\mouse.obj
+h:\githubvisualstudio\gamessimulation\nclgl\debug\objmesh.obj
+h:\githubvisualstudio\gamessimulation\nclgl\debug\oglrenderer.obj
+h:\githubvisualstudio\gamessimulation\nclgl\debug\plane.obj
+h:\githubvisualstudio\gamessimulation\nclgl\debug\quaternion.obj
+h:\githubvisualstudio\gamessimulation\nclgl\debug\scenenode.obj
+h:\githubvisualstudio\gamessimulation\nclgl\debug\shader.obj
+h:\githubvisualstudio\gamessimulation\nclgl\debug\window.obj
+h:\githubvisualstudio\gamessimulation\csc3222 coursework\debug\nclgl.lib
+h:\githubvisualstudio\gamessimulation\csc3222 coursework\debug\nclgl.pdb
+h:\githubvisualstudio\gamessimulation\nclgl\debug\nclgl.tlog\cl.command.1.tlog
+h:\githubvisualstudio\gamessimulation\nclgl\debug\nclgl.tlog\cl.read.1.tlog
+h:\githubvisualstudio\gamessimulation\nclgl\debug\nclgl.tlog\cl.write.1.tlog
+h:\githubvisualstudio\gamessimulation\nclgl\debug\nclgl.tlog\lib-link.read.1.tlog
+h:\githubvisualstudio\gamessimulation\nclgl\debug\nclgl.tlog\lib-link.write.1.tlog
+h:\githubvisualstudio\gamessimulation\nclgl\debug\nclgl.tlog\lib.command.1.tlog

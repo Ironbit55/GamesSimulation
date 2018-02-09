@@ -13,6 +13,7 @@ _-_-_-_-_-_-_-""  ""
 */
 #include <cmath>
 #include <iostream>
+//#include "Vector2.h"
 
 class Vector3	{
 public:
@@ -68,6 +69,12 @@ public:
 	static Vector3	Cross(const Vector3 &a, const Vector3 &b) {
 		return Vector3((a.y*b.z) - (a.z*b.y) , (a.z*b.x) - (a.x*b.z) , (a.x*b.y) - (a.y*b.x));	
 	}
+
+	//static Vector3	Cross(const Vector2 &a, const Vector2 &b) {
+	//	float bz = 0;
+	//	float az = 0;
+	//	return Vector3((a.y*bz) - (az*b.y), (az*b.x) - (a.x*bz), (a.x*b.y) - (a.y*b.x));
+	//}
 
 	inline friend std::ostream& operator<<(std::ostream& o, const Vector3& v) {
 		o << "Vector3(" << v.x << "," << v.y << "," << v.z <<")" << std::endl;

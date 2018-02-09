@@ -1,8 +1,9 @@
-﻿  Physics.cpp
-c:\users\edward\documents\visual studio 2015\projects\csc3222coursework\csc3222 coursework\csc3222 coursework example\physics.cpp(11): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
-c:\users\edward\documents\visual studio 2015\projects\csc3222coursework\csc3222 coursework\csc3222 coursework example\physics.cpp(52): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\edward\documents\visual studio 2015\projects\csc3222coursework\csc3222 coursework\csc3222 coursework example\physics.cpp(70): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\edward\documents\visual studio 2015\projects\csc3222coursework\csc3222 coursework\csc3222 coursework example\physics.cpp(121): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-c:\users\edward\documents\visual studio 2015\projects\csc3222coursework\csc3222 coursework\csc3222 coursework example\physics.cpp(122): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-  Project1.vcxproj -> C:\Users\Edward\Documents\Visual Studio 2015\Projects\CSC3222Coursework\CSC3222 Coursework\Debug\CSC3222 Coursework Framework.exe
-  Project1.vcxproj -> C:\Users\Edward\Documents\Visual Studio 2015\Projects\CSC3222Coursework\CSC3222 Coursework\Debug\CSC3222 Coursework Framework.pdb (Partial PDB)
+﻿Renderer.obj : warning LNK4049: locally defined symbol ___glewGetUniformLocation imported
+Renderer.obj : warning LNK4049: locally defined symbol ___glewUniform1i imported
+Renderer.obj : warning LNK4049: locally defined symbol ___glewUniform4fv imported
+Renderer.obj : warning LNK4049: locally defined symbol ___glewUniformMatrix4fv imported
+Renderer.obj : warning LNK4049: locally defined symbol ___glewUseProgram imported
+Renderer.obj : warning LNK4049: locally defined symbol ___glewUniform4uiv imported
+glew32.lib(glew.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'glew32.lib(glew.obj)' or at 'H:\githubvisualstudio\GamesSimulation\CSC3222 Coursework\Debug\vc120.pdb'; linking object as if no debug info
+  Project1.vcxproj -> H:\githubvisualstudio\GamesSimulation\CSC3222 Coursework\Debug\CSC3222 Coursework Framework.exe
+  Project1.vcxproj -> H:\githubvisualstudio\GamesSimulation\CSC3222 Coursework\Debug\CSC3222 Coursework Framework.pdb (Partial PDB)

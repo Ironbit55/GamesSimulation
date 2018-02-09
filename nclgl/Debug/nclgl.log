@@ -14,16 +14,16 @@
   Matrix4.cpp
   Keyboard.cpp
   HeightMap.cpp
-c:\users\edward\documents\visual studio 2015\projects\csc3222coursework\nclgl\heightmap.cpp(8): warning C4244: '=': conversion from 'float' to 'GLuint', possible loss of data
-c:\users\edward\documents\visual studio 2015\projects\csc3222coursework\nclgl\heightmap.cpp(9): warning C4244: '=': conversion from 'float' to 'GLuint', possible loss of data
-c:\users\edward\documents\visual studio 2015\projects\csc3222coursework\nclgl\heightmap.cpp(19): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-c:\users\edward\documents\visual studio 2015\projects\csc3222coursework\nclgl\heightmap.cpp(31): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-c:\users\edward\documents\visual studio 2015\projects\csc3222coursework\nclgl\heightmap.cpp(32): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-c:\users\edward\documents\visual studio 2015\projects\csc3222coursework\nclgl\heightmap.cpp(33): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-c:\users\edward\documents\visual studio 2015\projects\csc3222coursework\nclgl\heightmap.cpp(34): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+h:\githubvisualstudio\gamessimulation\nclgl\heightmap.cpp(8): warning C4244: '=': conversion from 'float' to 'GLuint', possible loss of data
+h:\githubvisualstudio\gamessimulation\nclgl\heightmap.cpp(9): warning C4244: '=': conversion from 'float' to 'GLuint', possible loss of data
+h:\githubvisualstudio\gamessimulation\nclgl\heightmap.cpp(19): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+h:\githubvisualstudio\gamessimulation\nclgl\heightmap.cpp(31): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+h:\githubvisualstudio\gamessimulation\nclgl\heightmap.cpp(32): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+h:\githubvisualstudio\gamessimulation\nclgl\heightmap.cpp(33): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+h:\githubvisualstudio\gamessimulation\nclgl\heightmap.cpp(34): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
   GameTimer.cpp
   Frustum.cpp
   CubeRobot.cpp
   Camera.cpp
   Generating Code...
-  nclgl.vcxproj -> C:\Users\Edward\Documents\Visual Studio 2015\Projects\CSC3222Coursework\CSC3222 Coursework\Debug\nclgl.lib
+  nclgl.vcxproj -> H:\githubvisualstudio\GamesSimulation\CSC3222 Coursework\Debug\nclgl.lib

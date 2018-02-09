@@ -1,4 +1,6 @@
+#pragma once
 #include "Physics.h"
+
 
 Physics::Physics()
 {
@@ -6,28 +8,40 @@ Physics::Physics()
 
 	for (int i = 0; i < numRaiders; i++)
 	{
-		PhysicsData temp;
+		Vector2 tempPosition = Vector2(-311 + 27 * i, -80.0f);
+		float tempRotation = i*20.0f;
+		float tempScale = 10.0f;
+		
+		Entity tempEntity = Entity(0, tempPosition, tempRotation, -199.9f, tempScale, tempScale);
 
+		PhysicsData temp;
 		temp.position = Vector3(-311 + 27 * i, -80.0f, -199.9f);
 		temp.rotation = i*20.0f;
 		temp.scale = Vector3(10.0f, 10.0f, 1.0f);
 
-		raiders.push_back(temp);
+		raiders.push_back(tempEntity);
 	}
+	
+	//Vector2 mapPosition = Vector2(0.0f, 100.0f);
+	//Vector3 mapScale = Vector3(864.0f, 540.0f, 100.0f);
+	//map = PhysicsNode(mapPosition, -100.0f, 0.0f, mapScale);
 
-	map.position = Vector3(0.0f, 100.0f, -200.0f);
+	map.position = Vector3(0.0f, 0.0f, -200.0f);
 	map.rotation = 0.0f;
 	map.scale = Vector3(864.0f, 540.0f, 100.0f);
 
-	dragon.position = Vector3(-300.0f, 90.0f, -199.5f);
+	Vector2 dragonPos = Vector2(-300.0f, 90.0f);
+	dragon = Entity(25, dragonPos, -199.5f, 0.0f, 50.0f, 50.0f);
+
+	/*dragon.position = Vector3(-300.0f, 90.0f, -199.5f);
 	dragon.rotation = 0.0f;
-	dragon.scale = Vector3(50.0f, 50.0f, 1.0f);
+	dragon.scale = Vector3(50.0f, 50.0f, 1.0f);*/
 
 	dragonState = 1;
 
-	breath.position = Vector3(0.0f, -50.0f, -0.3f);
-	breath.rotation = 270.0f;
-	breath.scale = Vector3(2.0f, 1.0f, 1.0f);
+	Vector2 breathPosition = Vector2(0.0f, -50.0f);
+	Vector3 breathScale = Vector3(2.0f, 1.0f, 1.0f);
+	breath = PhysicsNode(breathPosition, -0.3f, 270.0f, breathScale);
 
 	breathState = 1;
 }
@@ -56,7 +70,7 @@ void Physics::UpdatePhysics(float msec)
 
 	for (int i = 0; i < numRaiders; i++)
 	{
-		raiders.at(i).rotation += shift;
+		raiders.at(i).physicsNode.updateRotation(shift);
 	}
 
 	/* This segment demonstrates a simple finite state machine. State 1 is
@@ -69,22 +83,22 @@ void Physics::UpdatePhysics(float msec)
 
 	shift = 0.1*msec;
 
-	if (dragon.position.x > 100.0f)
+	if (dragon.physicsNode.getPosition().x > 100.0f)
 	{
 		dragonState = 0;
 	}
-	else if(dragon.position.x < -320.0f)
+	else if(dragon.physicsNode.getPosition().x < -320.0f)
 	{
 		dragonState = 1;
 	}
 
 	if (dragonState == 1)
 	{
-		dragon.position.x += shift;
+		dragon.physicsNode.moveX(shift);
 	}
 	else
 	{
-		dragon.position.x -= shift;
+		dragon.physicsNode.moveX(-shift);
 	}
 
 	/* Note also, as highlighted in the comments in Renderer.cpp, that
@@ -94,7 +108,7 @@ void Physics::UpdatePhysics(float msec)
 	also inherits its orientation from the dragon - to see this in
 	action, uncomment the line of code below: */
 
-	dragon.rotation -= shift;
+	dragon.physicsNode.updateRotation(-shift);
 
 	/* Lastly, there may be times when we want to control the scale of
 	an object. If that object collides, it makes sense for its physics
@@ -103,28 +117,24 @@ void Physics::UpdatePhysics(float msec)
 	PhysicsData just in case it has changed - here is an example of that
 	applied to the dragon's breath weapon. */
 
-	if (breath.scale.x > 100.0f)
+	if (breath.getScale().x > 100.0f)
 	{
 		breathState = 0;
-		breath.scale.x = 100;
-		breath.scale.y = 50;
+		breath.setScaleXY(100, 50);
 	}
-	else if (breath.scale.x < 2.0f)
+	else if (breath.getScale().x < 2.0f)
 	{
 		breathState = 1;
-		breath.scale.x = 2.0f;
-		breath.scale.y = 1.0f;
+		breath.setScaleXY(2.0f, 1.0f);
 	}
 
 	if (breathState == 1)
 	{
-		breath.scale.x += 1.5*shift;
-		breath.scale.y += 0.75*shift;
+		breath.addToScaleXY(1.5*shift, 0.75*shift);
 	}
 	else
 	{
-		breath.scale.x -= 2*shift;
-		breath.scale.y -= shift;
+		breath.addToScaleXY(-2 * shift, -shift);
 	}
 
 }

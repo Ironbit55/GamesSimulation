@@ -65,49 +65,58 @@ Renderer::Renderer(Window &parent, Physics* physics) : OGLRenderer(parent) {
 
 	root = new SceneNode();
 
+	//SceneNode * mapNode = new SceneNode();
+	//mapNode->SetColour(Vector4(1, 1, 1, 1));
+	//mapNode->SetTransform(Matrix4::Translation(p->map.getPosition3d())*Matrix4::Rotation(p->map.getRotation(), Vector3(0,0,1)));
+	//mapNode->SetModelScale(p->map.getScale());
+	//mapNode->SetMesh(map);
+	//mapNode->SetBoundingRadius(5.0f);
+	//mapNode->SetPhysicsData(&(p->map));
+	//root->AddChild(mapNode);
+
 	SceneNode * mapNode = new SceneNode();
 	mapNode->SetColour(Vector4(1, 1, 1, 1));
-	mapNode->SetTransform(Matrix4::Translation(p->map.position)*Matrix4::Rotation(p->map.rotation, Vector3(0,0,1)));
+	mapNode->SetTransform(Matrix4::Translation(p->map.position)*Matrix4::Rotation(p->map.rotation, Vector3(0, 0, 1)));
 	mapNode->SetModelScale(p->map.scale);
 	mapNode->SetMesh(map);
 	mapNode->SetBoundingRadius(5.0f);
 	mapNode->SetPhysicsData(&(p->map));
 	root->AddChild(mapNode);
+	//SceneNode * dragonNode = new SceneNode();
+	
+	//dragonNode->SetColour(Vector4(1, 1, 1, 0.99));
+	//dragonNode->SetTransform(Matrix4::Translation(p->dragon.physicsNode.getPosition3d())*Matrix4::Rotation(p->dragon.physicsNode.getRotation(), Vector3(0,0,1)));
+	//dragonNode->SetModelScale(p->dragon.physicsNode.getScale());
+	//dragonNode->SetMesh(dragon);
+	//dragonNode->SetBoundingRadius(5.0f);
+	//dragonNode->SetPhysicsData(&(p->dragon.physicsNode));
+	//root->AddChild(dragonNode);
 
-	SceneNode * dragonNode = new SceneNode();
-	dragonNode->SetColour(Vector4(1, 1, 1, 0.99));
-	dragonNode->SetTransform(Matrix4::Translation(p->dragon.position)*Matrix4::Rotation(p->dragon.rotation, Vector3(0,0,1)));
-	dragonNode->SetModelScale(p->dragon.scale);
-	dragonNode->SetMesh(dragon);
-	dragonNode->SetBoundingRadius(5.0f);
-	dragonNode->SetPhysicsData(&(p->dragon));
-	root->AddChild(dragonNode);
+	///* Note that breathNode below is an example of a child of dragonNode. This means that its position is translated relative
+	//to the dragon (notice how 'out of sync' its coordinates appear to be in Physics::Physics() - only slightly moved down
+	//(negative y). Also notice how it moves when the dragon does, without being explicitly told to. Its rotation is initially set purely
+	//to make sure it points down. Note that if we rotate the dragon (you can experiment with that) the breathNode moves as though it were
+	//bolted to the bottom of the dragon. */
 
-	/* Note that breathNode below is an example of a child of dragonNode. This means that its position is translated relative
-	to the dragon (notice how 'out of sync' its coordinates appear to be in Physics::Physics() - only slightly moved down
-	(negative y). Also notice how it moves when the dragon does, without being explicitly told to. Its rotation is initially set purely
-	to make sure it points down. Note that if we rotate the dragon (you can experiment with that) the breathNode moves as though it were
-	bolted to the bottom of the dragon. */
+	//SceneNode* breathNode = new SceneNode();
+	//breathNode->SetColour(Vector4(1, 1, 1, 0.999));
+	//breathNode->SetTransform(Matrix4::Translation(p->breath.getPosition3d())*Matrix4::Rotation(p->breath.getRotation(), Vector3(0,0,1)));
+	//breathNode->SetModelScale(p->breath.getScale());
+	//breathNode->SetMesh(breathWeapon);
+	//breathNode->SetBoundingRadius(5.0f);
+	//breathNode->SetPhysicsData(&(p->dragon.physicsNode));
+	//dragonNode->AddChild(breathNode);
 
-	SceneNode* breathNode = new SceneNode();
-	breathNode->SetColour(Vector4(1, 1, 1, 0.999));
-	breathNode->SetTransform(Matrix4::Translation(p->breath.position)*Matrix4::Rotation(p->breath.rotation, Vector3(0,0,1)));
-	breathNode->SetModelScale(p->breath.scale);
-	breathNode->SetMesh(breathWeapon);
-	breathNode->SetBoundingRadius(5.0f);
-	breathNode->SetPhysicsData(&(p->breath));
-	dragonNode->AddChild(breathNode);
-
-	for (int i = 0; i < p->raiders.size(); ++i) {
-		SceneNode * s = new SceneNode();
-		s->SetColour(Vector4(1, 1, 1, 0.999));
-		s->SetTransform(Matrix4::Translation(p->raiders.at(i).position)*Matrix4::Rotation(p->raiders.at(i).rotation, Vector3(0,0,1)));
-		s->SetModelScale(p->raiders.at(i).scale);
-		s->SetMesh(raider);
-		s->SetBoundingRadius(5.0f);
-		s->SetPhysicsData(&(p->raiders.at(i)));
-		root->AddChild(s);
-	}
+	//for (int i = 0; i < p->raiders.size(); ++i) {
+	//	SceneNode * s = new SceneNode();
+	//	s->SetColour(Vector4(1, 1, 1, 0.999));
+	//	s->SetTransform(Matrix4::Translation(p->raiders.at(i).physicsNode.getPosition3d())*Matrix4::Rotation(p->raiders.at(i).physicsNode.getRotation(), Vector3(0,0,1)));
+	//	s->SetModelScale(p->raiders.at(i).physicsNode.getScale());
+	//	s->SetMesh(raider);
+	//	s->SetBoundingRadius(5.0f);
+	//	s->SetPhysicsData(&(p->raiders.at(i).physicsNode));
+	//	root->AddChild(s);
+	//}
 
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_BLEND);

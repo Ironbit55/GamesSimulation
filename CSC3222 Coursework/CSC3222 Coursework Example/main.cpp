@@ -5,7 +5,7 @@
 #pragma comment(lib, "nclgl.lib")
 
 int main() {
-	Window w("CSC3222 Coursework", 1920, 1080, true);
+	Window w("CSC3222 Coursework", 1920, 1080, false);
 	if (!w.HasInitialised()) {
 		return -1;
 	}
@@ -17,7 +17,7 @@ int main() {
 		return -1;
 	}
 
-	w.LockMouseToWindow(true);
+	w.LockMouseToWindow(false);
 	w.ShowOSPointer(false);
 
 	while (w.UpdateWindow() && !Window::GetKeyboard()->KeyDown(KEYBOARD_ESCAPE)) {
