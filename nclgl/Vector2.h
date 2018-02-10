@@ -30,9 +30,6 @@ public:
 	float x;
 	float y;
 
-	//if length less than 0 then it's stale so recalculate
-	float cachedLength;
-
 	void ToZero(){
 		x = 0.0f;
 		y = 0.0f;

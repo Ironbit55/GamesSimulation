@@ -32,8 +32,11 @@ bool	SceneNode::CompareByZ(SceneNode*a, SceneNode*b) {
 
 void	SceneNode::Update(float msec) {
 	if (parent) {
-		SetModelScale(physicsData->scale);
-		SetTransform(Matrix4::Translation(physicsData->position)*Matrix4::Rotation(physicsData->rotation, Vector3(0, 0, 1)));
+		SetModelScale(physicsNode->getScale());
+
+		SetTransform(Matrix4::Translation(physicsNode->getPosition3d())*Matrix4::Rotation(physicsNode->getRotation(), Vector3(0, 0, 1)));
+		
+		//we don't want node to inherit depth of parent, not sure how to do this
 		worldTransform = parent->worldTransform * transform;
 	}
 	else {

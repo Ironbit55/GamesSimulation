@@ -19,7 +19,7 @@ public:
 
 	void UpdatePhysics(float msec);
 
-	PhysicsData map;
+	PhysicsNode map;
 	Entity dragon;
 	PhysicsNode breath;
 	vector<Entity> raiders;

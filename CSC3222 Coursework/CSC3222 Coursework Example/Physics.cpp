@@ -13,24 +13,16 @@ Physics::Physics()
 		float tempScale = 10.0f;
 		
 		Entity tempEntity = Entity(0, tempPosition, tempRotation, -199.9f, tempScale, tempScale);
-
-		PhysicsData temp;
-		temp.position = Vector3(-311 + 27 * i, -80.0f, -199.9f);
-		temp.rotation = i*20.0f;
-		temp.scale = Vector3(10.0f, 10.0f, 1.0f);
-
 		raiders.push_back(tempEntity);
 	}
 	
-	//Vector2 mapPosition = Vector2(0.0f, 100.0f);
-	//Vector3 mapScale = Vector3(864.0f, 540.0f, 100.0f);
-	//map = PhysicsNode(mapPosition, -100.0f, 0.0f, mapScale);
+	Vector2 mapPosition = Vector2(0.0f, 100.0f);
+	Vector3 mapScale = Vector3(864.0f, 540.0f, 100.0f);
+	map = PhysicsNode(mapPosition, -200.0f, 0.0f, mapScale);
 
-	map.position = Vector3(0.0f, 0.0f, -200.0f);
-	map.rotation = 0.0f;
-	map.scale = Vector3(864.0f, 540.0f, 100.0f);
-
+	
 	Vector2 dragonPos = Vector2(-300.0f, 90.0f);
+
 	dragon = Entity(25, dragonPos, -199.5f, 0.0f, 50.0f, 50.0f);
 
 	/*dragon.position = Vector3(-300.0f, 90.0f, -199.5f);
@@ -41,6 +33,7 @@ Physics::Physics()
 
 	Vector2 breathPosition = Vector2(0.0f, -50.0f);
 	Vector3 breathScale = Vector3(2.0f, 1.0f, 1.0f);
+	//depth is relative to parent... which probably isn't what we want
 	breath = PhysicsNode(breathPosition, -0.3f, 270.0f, breathScale);
 
 	breathState = 1;

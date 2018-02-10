@@ -23,7 +23,7 @@ _-_-_-_-_-_-_-""  ""
 #include "Vector4.h"
 #include "Mesh.h"
 #include <vector>
-#include "../CSC3222 Coursework/CSC3222 Coursework Example/Physics.h"
+#include "../CSC3222 Coursework/CSC3222 Coursework Example/PhysicsNode.h"
 
 class SceneNode {
 public:
@@ -54,7 +54,7 @@ public:
 	void			SetMesh(Mesh*m) { mesh = m; }
 	Mesh*			GetMesh() { return mesh; }
 
-	void			SetPhysicsData(PhysicsData* p) { physicsData = p; }
+	void			SetPhysicsNode(PhysicsNode* p) { physicsNode = p; }
 
 	bool	IsAwake() { return awake; }
 	void	Wake() { awake = true; }
@@ -77,6 +77,6 @@ protected:
 	Mesh*		mesh;
 	bool		awake;
 	std::vector<SceneNode*>		children;
-	PhysicsData*	physicsData;
+	PhysicsNode*	physicsNode;
 };
 
