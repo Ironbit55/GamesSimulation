@@ -3,6 +3,10 @@
 #include <vector>
 #include "../../nclgl/Vector3.h"
 #include "../CSC3222 Coursework Example/Entity.h"
+#include "../CSC3222 Coursework Example/Entities/Dragon.h"
+#include "../CSC3222 Coursework Example/Entities/Leader.h"
+#include "../CSC3222 Coursework Example/Entities/Follower.h"
+
 
 using std::vector;
 
@@ -20,9 +24,10 @@ public:
 	void UpdatePhysics(float msec);
 
 	PhysicsNode map;
-	Entity dragon;
+	Dragon dragon;
 	PhysicsNode breath;
-	vector<Entity> raiders;
+	vector<Follower> raiders;
+	Leader leader;
 	
 private:
 	int numRaiders;

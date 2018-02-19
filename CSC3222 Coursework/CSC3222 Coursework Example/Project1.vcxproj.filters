@@ -10,11 +10,14 @@
     <ClCompile Include="Physics.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PhysicsNode.cpp" />
+    <ClCompile Include="Map.cpp" />
+    <ClCompile Include="Entities\Dragon.cpp" />
     <ClCompile Include="Entity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PhysicsNode.cpp" />
-    <ClCompile Include="Map.cpp" />
+    <ClCompile Include="Entities\Follower.cpp" />
+    <ClCompile Include="Entities\Leader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Physics.h">
@@ -23,11 +26,14 @@
     <ClInclude Include="Renderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="PhysicsNode.h" />
+    <ClInclude Include="Map.h" />
+    <ClInclude Include="Entities\Dragon.h" />
     <ClInclude Include="Entity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PhysicsNode.h" />
-    <ClInclude Include="Map.h" />
+    <ClInclude Include="Entities\Follower.h" />
+    <ClInclude Include="Entities\Leader.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">

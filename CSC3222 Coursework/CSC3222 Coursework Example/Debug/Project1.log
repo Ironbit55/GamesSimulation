@@ -1,7 +1,7 @@
 ﻿  Physics.cpp
 c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\physics.cpp(11): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
-c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\physics.cpp(59): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\physics.cpp(77): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\physics.cpp(126): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\physics.cpp(61): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\physics.cpp(79): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\physics.cpp(128): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
   Project1.vcxproj -> C:\Users\Edward\Documents\GitHubVisualStudio\GamesSimulation\CSC3222 Coursework\Debug\CSC3222 Coursework Framework.exe
   Project1.vcxproj -> C:\Users\Edward\Documents\GitHubVisualStudio\GamesSimulation\CSC3222 Coursework\Debug\CSC3222 Coursework Framework.pdb (Partial PDB)

@@ -29,12 +29,8 @@ public:
 			scale(_scale) {};
 
 
-	PhysicsNode(int gridX, int gridY, const float _rotation = 0.0f, 
-		const Vector3 _scale = Vector3(1.0f, 1.0f, 1.0f)) 
-			: position(gridToWorldPosition(gridX, gridY)),
-			depth(depth),
-			rotation(_rotation),
-			scale(_scale) {}
+	PhysicsNode(int gridX, int gridY, const float _depth, const float _rotation = 0.0f, 
+		const Vector3 _scale = Vector3(1.0f, 1.0f, 1.0f)) : PhysicsNode(Map::gridToWorldPosition(gridX, gridY), _depth, _rotation, _scale) {}
 		
 	
 
@@ -46,7 +42,7 @@ public:
 	float const getRotation() { return rotation; }
 	Vector3 const getScale() { return scale; }
 	
-	Vector2 gridToWorldPosition(int gridX, int gridY);
+	//Vector2 gridToWorldPosition(int gridX, int gridY);
 
 
 	void setPosition(Vector2 position) { this->position = position; }
@@ -71,7 +67,7 @@ public:
 	}
 
 	void setGridPosition(int x, int y) { 
-		setPosition(gridToWorldPosition(x, y));
+		setPosition(Map::gridToWorldPosition(x, y));
 	}
 
 	~PhysicsNode() {};

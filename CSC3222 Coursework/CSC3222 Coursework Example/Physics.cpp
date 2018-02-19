@@ -6,16 +6,18 @@ Physics::Physics()
 {
 	numRaiders = 16;
 
-	for (int i = 0; i < numRaiders; i++)
+	for (int i = 0; i < numRaiders - 1; i++)
 	{
-		Vector2 tempPosition = Vector2(-311 + 27 * i, -80.0f);
+		Vector2 tempPosition = Vector2(0 + 27 * i, -80.0f);
 		float tempRotation = i*20.0f;
-		float tempScale = 10.0f;
-		
-		Entity tempEntity = Entity(0, tempPosition, tempRotation, -199.9f, tempScale, tempScale);
-		raiders.push_back(tempEntity);
+		//Follower tempFollower = Follower(tempPosition, tempRotation);
+		Follower tempFollower = Follower(24 + i, 15, tempRotation);
+		raiders.push_back(tempFollower);
 	}
-	
+	 //leader = &raiders.back();
+	leader = Leader(30, 17, 20.0f);
+	raiders.push_back(leader);
+	leader.physicsNode.setGridPosition(40, 17);
 	Vector2 mapPosition = Vector2(0.0f, 100.0f);
 	Vector3 mapScale = Vector3(864.0f, 540.0f, 100.0f);
 	map = PhysicsNode(mapPosition, -200.0f, 0.0f, mapScale);
@@ -23,7 +25,7 @@ Physics::Physics()
 	
 	Vector2 dragonPos = Vector2(-300.0f, 90.0f);
 
-	dragon = Entity(25, dragonPos, -199.5f, 0.0f, 50.0f, 50.0f);
+	dragon = Dragon(dragonPos);
 
 	/*dragon.position = Vector3(-300.0f, 90.0f, -199.5f);
 	dragon.rotation = 0.0f;
