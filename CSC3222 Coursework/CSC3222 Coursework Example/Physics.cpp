@@ -6,24 +6,21 @@ Physics::Physics()
 {
 	numRaiders = 16;
 
-	for (int i = 0; i < numRaiders - 1; i++)
-	{
-		//Vector2 tempPosition = Map::MAP_BOTTOM_LEFT;
+	for (int i = 0; i < numRaiders - 1; i++){
 		float tempRotation = i*20.0f;
-		//Follower tempFollower = Follower(tempPosition, tempRotation);
 		Follower tempFollower = Follower(24 + i, 15, tempRotation);
+
 		raiders.push_back(tempFollower);
 	}
 
 	 //leader = &raiders.back();
 	leader = Leader(30, 17, 20.0f);
 	raiders.push_back(leader);
-	leader.physicsNode.setGridPosition(40, 17);
 
 
 	Vector2 mapPosition = Vector2(0.0f, 0.0f);
 	Vector3 mapScale = Vector3(Map::MAP_IMAGE_HALF_WIDTH, Map::MAP_IMAGE_HALF_HEIGHT, 100.0f);
-	map = PhysicsNode(mapPosition, -200.0f, 0.0f, mapScale);
+	map = PhysicsNode(mapPosition, mapScale, -200.0f);
 
 	
 	Vector2 dragonPos = Vector2(-300.0f, 90.0f);
@@ -33,7 +30,7 @@ Physics::Physics()
 	Vector2 breathPosition = Vector2(0.0f, -50.0f);
 	Vector3 breathScale = Vector3(2.0f, 1.0f, 1.0f);
 	//depth is relative to parent... which probably isn't what we want
-	breath = PhysicsNode(breathPosition, -0.3f, 270.0f, breathScale);
+	breath = PhysicsNode(breathPosition, breathScale, -0.3f, 270.0f);
 
 	breathState = 1;
 }

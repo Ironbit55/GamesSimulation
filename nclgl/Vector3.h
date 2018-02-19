@@ -105,9 +105,16 @@ public:
 		z -= a.z;
 	}
 
+	inline void  operator*=(const float &a) {
+		x *= a;
+		y *= a;
+		z *= a;
+	}
+
 	inline Vector3  operator*(const float a) const{
 		return Vector3(x * a,y * a, z * a);
 	}
+
 
 	inline Vector3  operator*(const Vector3  &a) const{
 		return Vector3(x * a.x,y * a.y, z * a.z);

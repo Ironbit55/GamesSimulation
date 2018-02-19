@@ -4,8 +4,14 @@ class Dragon :
 	public Entity
 {
 public:
-	Dragon(const Vector2 pos = Vector2(0.0f, 0.0f), const float rotation = 0.0f) : Entity(25.0f, pos, -199.5f, rotation, 50.0f, 50.0f) {}
-	Dragon(const int gridX, const int gridY, const float rotation = 0.0f) : Entity(25.0f, gridX, gridY, -199.5f, rotation, 50.0f, 50.0f) {};
+	Dragon(const float rotation = 0.0f) : Entity(25.0f, 50.0f, 50.0f, -199.5f, rotation) {}
+
+	Dragon(const Vector2 pos, const float rotation = 0.0f) : Dragon(rotation){
+		this->physicsNode.setPosition(pos);
+	}
+	Dragon(const int gridX, const int gridY, const float rotation = 0.0f) : Dragon(rotation){
+		this->setGridPosition(gridX, gridY);
+	};
 	~Dragon() {}
 };
 

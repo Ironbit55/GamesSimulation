@@ -1,28 +1,50 @@
 #pragma once
 #include "Components/PhysicsNode.h"
+#include "Components/VelocityNode.h"
 
 class Entity
 {
 public:
 
+	Entity(const float aggroRange, const float scaleX, const float scaleY,  const float depth = 0, const float rotation = 0.0f) 
+		: physicsNode(Vector3(scaleX, scaleY, 1.0f), depth, rotation), 
+		aggroRange(aggroRange),
+		entitiesInRange(0) {};
 
-	Entity() : physicsNode() {};
-	Entity(const float aggroRange, const Vector2 position = Vector2(0.0f, 0.0f), const float depth = 0, const float rotation = 0.0f,
-		const float scaleX = 1.0f, const float scaleY = 1.0f)
-		: physicsNode(position, depth, rotation, Vector3(scaleX, scaleY, 1.0f)), aggroRange(aggroRange) {};
 
-	Entity(const float aggroRange, const int gridX, const int gridY, const float depth = 0, const float rotation = 0.0f,
-		const float scaleX = 1.0f, const float scaleY = 1.0f)
-		: physicsNode(gridX, gridY, depth, rotation, Vector3(scaleX, scaleY, 1.0f)), aggroRange(aggroRange) {};
+	Entity(const Vector2 position, const float aggroRange, const float scaleX, const float scaleY, const float depth = 0, const float rotation = 0.0f)
+		:Entity(aggroRange, scaleX, scaleY, depth, rotation){
 
-	float const getAggroRange() { return aggroRange; }
-	int const getEntitiesInRange() { return entitiesInRange; }
+		this->physicsNode.setPosition(position);
+	}
+
+	Entity(const int gridX, const int gridY, const float aggroRange, const float scaleX, const float scaleY, const float depth = 0, const float rotation = 0.0f)
+		:Entity(aggroRange, scaleX, scaleY, depth, rotation){
+
+		this->setGridPosition(gridX, gridY);
+	}
+
+	float getAggroRange() const { return aggroRange; }
+	int getEntitiesInRange() const { return entitiesInRange; }
 	
-	void setAggroRange(float aggro) { this->aggroRange = aggro; }
-	void setEntititiesInRange(int entitities) { this->entitiesInRange = entitities; }
+	void setAggroRange(const float aggro) { this->aggroRange = aggro; }
+	void setEntititiesInRange(const int entitities) { this->entitiesInRange = entitities; }
+
+	void setGridPosition(const int x, const int y) {
+		physicsNode.setPosition(Map::gridToWorldPosition(x, y));
+	}
+
+	void setPhysics(){
+		
+	}
+
+	void setVelocity(){
+		
+	}
 
 	~Entity() {};
 	PhysicsNode physicsNode;
+	//VelocityNode velocityNode;
 private:
 	float aggroRange;
 	int entitiesInRange;

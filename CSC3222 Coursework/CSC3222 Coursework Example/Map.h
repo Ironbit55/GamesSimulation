@@ -1,8 +1,7 @@
 #pragma once
 #include "../../nclgl/Vector2.h"
 
-class Map
-{
+class Map{
 	public:
 		static const int GRID_SIZE;
 		static const Vector2 MAP_IMAGE_BORDER_SIZE;
@@ -13,8 +12,7 @@ class Map
 		static const Vector2 MAP_BOTTOM_LEFT;
 		
 
-		static Vector2 gridToWorldPosition(int gridX, int gridY)
-		{
+		static Vector2 gridToWorldPosition(const int gridX, const int gridY){
 			return Vector2((gridX * Map::GRID_SIZE) + MAP_BOTTOM_LEFT.x, (gridY * Map::GRID_SIZE) + MAP_BOTTOM_LEFT.y);
 		}
 

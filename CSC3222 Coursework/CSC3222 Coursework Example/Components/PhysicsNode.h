@@ -18,20 +18,20 @@ struct PhysicsData {
 	Vector3 scale;
 };
 
-class PhysicsNode
-{
+class PhysicsNode {
 public:
 
-	PhysicsNode(const Vector2 _position = Vector2(0.0f, 0.0f), const float _depth = 0.0f, const float _rotation = 0.0f,
-		const Vector3 _scale = Vector3(1.0f, 1.0f, 1.0f))
+	PhysicsNode(const Vector3 _scale = Vector3(100.0f, 100.0f, 100.0f), const float _depth = 0.0f, const float _rotation = 0.0f)
+		: position(Vector2(0.0f, 0.0f)),
+		depth(_depth),
+		rotation(_rotation),
+		scale(_scale) {};
+
+	PhysicsNode(const Vector2 _position, const Vector3 _scale, const float _depth = 0.0f, const float _rotation = 0.0f)
 			: position(_position),
 			depth(_depth), 
 			rotation(_rotation), 
 			scale(_scale) {};
-
-
-	PhysicsNode(const int gridX, const int gridY, const float _depth, const float _rotation = 0.0f,
-		const Vector3 _scale = Vector3(1.0f, 1.0f, 1.0f)) : PhysicsNode(Map::gridToWorldPosition(gridX, gridY), _depth, _rotation, _scale) {}
 		
 	
 
@@ -57,18 +57,13 @@ public:
 	void setRotation(const float rotation) { this->rotation = rotation; }
 	void updateRotation(const float delta) { this->rotation += delta; }
 	void setScale(const Vector3 scale) {this->scale = scale;}
-	void setScaleXY(const float scaleX, const float scaleY)
-	{ 
+	void setScaleXY(const float scaleX, const float scaleY){ 
 		this->scale.x = scaleX;
 		this->scale.y = scaleY;
 	}
 	void addToScaleXY(const float deltaX, const float deltaY) {
 		this->scale.x += deltaX;
 		this->scale.y += deltaY;
-	}
-
-	void setGridPosition(const int x, const int y) {
-		setPosition(Map::gridToWorldPosition(x, y));
 	}
 
 	~PhysicsNode() {};
