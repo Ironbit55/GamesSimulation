@@ -10,7 +10,7 @@ Renderer::Renderer(Window &parent, Physics* physics) : OGLRenderer(parent) {
 
 	projMatrix = Matrix4::Orthographic(-1.0f, 10000.0f, width / 2.0f, -width / 2.0f, height / 2.0f, -height / 2.0f);
 	
-	camera = new Camera(0.0f, 0.0f, Vector3(0, 100, 750.0f));
+	camera = new Camera(0.0f, 0.0f, Vector3(0, 0, 750.0f));
 
 	currentShader = new Shader(SHADERDIR"SceneVertex.glsl", SHADERDIR"SceneFragment.glsl");
 

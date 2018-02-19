@@ -5,7 +5,7 @@
 #pragma comment(lib, "nclgl.lib")
 
 int main() {
-	Window w("CSC3222 Coursework", 1920, 1080, false);
+	Window w("CSC3222 Coursework", 1920, 1080, true);
 	if (!w.HasInitialised()) {
 		return -1;
 	}

@@ -23,7 +23,7 @@ _-_-_-_-_-_-_-""  ""
 #include "Vector4.h"
 #include "Mesh.h"
 #include <vector>
-#include "../CSC3222 Coursework/CSC3222 Coursework Example/PhysicsNode.h"
+#include "../CSC3222 Coursework/CSC3222 Coursework Example/Components/PhysicsNode.h"
 
 class SceneNode {
 public:

@@ -122,8 +122,10 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Physics.cpp" />
-    <ClCompile Include="PhysicsNode.cpp" />
+    <ClCompile Include="Components\PhysicsNode.cpp" />
     <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="Components\RenderNode2D.cpp" />
+    <ClCompile Include="Components\VelocityNode.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entities\Dragon.h" />
@@ -132,8 +134,10 @@
     <ClInclude Include="Entities\Leader.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Physics.h" />
-    <ClInclude Include="PhysicsNode.h" />
+    <ClInclude Include="Components\PhysicsNode.h" />
     <ClInclude Include="Renderer.h" />
+    <ClInclude Include="Components\RenderNode2D.h" />
+    <ClInclude Include="Components\VelocityNode.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

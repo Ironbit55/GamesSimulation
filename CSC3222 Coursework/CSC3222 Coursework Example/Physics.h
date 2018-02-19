@@ -6,6 +6,7 @@
 #include "../CSC3222 Coursework Example/Entities/Dragon.h"
 #include "../CSC3222 Coursework Example/Entities/Leader.h"
 #include "../CSC3222 Coursework Example/Entities/Follower.h"
+#include "Components/PhysicsNode.h"
 
 
 using std::vector;

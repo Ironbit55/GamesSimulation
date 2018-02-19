@@ -5,11 +5,20 @@ class Map
 {
 	public:
 		static const int GRID_SIZE;
-		static const Vector2 MAP_OFFSET;
+		static const Vector2 MAP_IMAGE_BORDER_SIZE;
+		static const float MAP_IMAGE_HALF_WIDTH;
+		static const float MAP_IMAGE_HALF_HEIGHT;
+		static const float MAP_WIDTH;
+		static const float MAP_HEIGHT;
+		static const Vector2 MAP_BOTTOM_LEFT;
+		
 
 		static Vector2 gridToWorldPosition(int gridX, int gridY)
 		{
-			return Vector2((gridX * Map::GRID_SIZE) + MAP_OFFSET.x, (gridY * Map::GRID_SIZE) + MAP_OFFSET.y);
+			return Vector2((gridX * Map::GRID_SIZE) + MAP_BOTTOM_LEFT.x, (gridY * Map::GRID_SIZE) + MAP_BOTTOM_LEFT.y);
 		}
+
+	private:
+		
 };
 

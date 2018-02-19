@@ -1,5 +1,6 @@
 #pragma once
-#include "PhysicsNode.h"
+#include "Components/PhysicsNode.h"
+
 class Entity
 {
 public:
