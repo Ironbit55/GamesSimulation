@@ -15,7 +15,7 @@ void VelocityNode::update(float msec){
 	}
 
 	//uses new velocity to inform new displacement
-	physicsNode.move(Vector2(velocity.x, velocity.y) * msec);
+	physicsNode->move(Vector2(velocity.x, velocity.y) * msec);
 
 	acceleration.ToZero();
 }

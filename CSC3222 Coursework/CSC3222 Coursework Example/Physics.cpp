@@ -11,11 +11,17 @@ Physics::Physics()
 		Follower tempFollower = Follower(24 + i, 15, tempRotation);
 
 		raiders.push_back(tempFollower);
+		raiders.at(i).velocityNode.applyVelocity(Vector2(0.0f, 0.02f));
 	}
-
-	 //leader = &raiders.back();
+	
+	 //push leader to followers/raider list
 	leader = Leader(30, 17, 20.0f);
 	raiders.push_back(leader);
+
+	//get pointer to leader
+	Entity* leaderPtr = &raiders.back();
+
+	leaderPtr->velocityNode.applyVelocity(Vector2(0.0f, -0.02f));
 
 
 	Vector2 mapPosition = Vector2(0.0f, 0.0f);
@@ -25,6 +31,7 @@ Physics::Physics()
 	
 	Vector2 dragonPos = Vector2(-300.0f, 90.0f);
 	dragon = Dragon(dragonPos);
+	dragon.velocityNode.applyVelocity(Vector2(0.0f, 0.02f));
 	dragonState = 1;
 
 	Vector2 breathPosition = Vector2(0.0f, -50.0f);
@@ -42,6 +49,11 @@ Physics::~Physics()
 
 void Physics::UpdatePhysics(float msec)
 {
+	for (int i = 0; i < numRaiders; i++){
+		raiders.at(i).update(msec);
+	}
+	dragon.update(msec);
+
 
 	/* Placeholder functionality to show things moving on screen
 	Note that our physics update is parcelled away from our renderer. So

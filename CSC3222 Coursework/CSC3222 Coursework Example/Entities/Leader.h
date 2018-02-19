@@ -3,11 +3,11 @@
 #include "Follower.h"
 
 class Leader :
-	public Follower
-{
+	public Follower {
 public:
-	Leader(const Vector2 pos = Vector2(0.0f, 0.0f), const float rotation = 0.0f) : Follower(pos, rotation) {};
+	Leader(const Vector2 pos = Vector2(0.0f, 0.0f), const float rotation = 0.0f) : Follower(pos, rotation){
+		//velocityNode.setMaxSpeed(5.0f);
+	};
 	Leader(const int gridX, const int gridY, const float rotation = 0.0f) : Follower(gridX, gridY, rotation) {};
-	~Leader() {}
 };
 
