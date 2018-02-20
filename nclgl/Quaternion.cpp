@@ -111,11 +111,28 @@ Quaternion Quaternion::EulerAnglesToQuaternion(float pitch, float yaw, float rol
 	return q;
 };
 
-Quaternion Quaternion::AxisAngleToQuaterion(const Vector3& vector, float degrees)	{
-	float theta = (float)DegToRad(degrees);
-	float result = (float)sin( theta / 2.0f );
+Quaternion Quaternion::AxisAngleToQuaternion(const Vector3& vector, const float degrees)	{
+	return AxisAngleRadsToQuaternion(vector, (float)DegToRad(degrees));
+}
 
-	return Quaternion((float)(vector.x * result), (float)(vector.y * result), (float)(vector.z * result), (float)cos( theta / 2.0f ));
+Quaternion Quaternion::AxisAngleRadsToQuaternion(const Vector3& vector, const float rads) {
+	float theta = rads;
+	float result = (float)sin(theta / 2.0f);
+
+	return Quaternion((float)(vector.x * result), (float)(vector.y * result), (float)(vector.z * result), (float)cos(theta / 2.0f));
+}
+
+void Quaternion::RotatePointByQuaternion(const Quaternion& q, Vector3& point){
+	Quaternion qNormalised = q;
+	qNormalised.Normalise();
+
+	Quaternion qPoint = Quaternion(point.x, point.y, point.z, 0);
+	//half result
+	Quaternion result = qNormalised * qPoint;
+	//full result
+	result = result * qNormalised.Conjugate();
+
+	point = Vector3(result.x, result.y, result.z);
 }
 
 void Quaternion::GenerateW()	{

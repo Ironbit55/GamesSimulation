@@ -2,6 +2,7 @@
 #include "../../nclgl/Vector3.h"
 #include "../../nclgl/Vector2.h"
 #include "../Map.h"
+#include "../../../nclgl/quaternion.h"
 
 /* An elementary Physics Data structure, containing the bare minimum of information necessary to
 say where an object should appear, and which way it should point. As we increase the complexity
@@ -24,14 +25,14 @@ public:
 	PhysicsNode(const Vector3 _scale = Vector3(100.0f, 100.0f, 100.0f), const float _depth = 0.0f, const float _rotation = 0.0f)
 		: position(Vector2(0.0f, 0.0f)),
 		depth(_depth),
-		rotation(_rotation),
-		scale(_scale) {};
+		scale(_scale){
+		setRotation(_rotation);
+	};
 
-	PhysicsNode(const Vector2 _position, const Vector3 _scale, const float _depth = 0.0f, const float _rotation = 0.0f)
-			: position(_position),
-			depth(_depth), 
-			rotation(_rotation), 
-			scale(_scale) {};
+	PhysicsNode(const Vector2 _position, const Vector3 _scale, const float _depth = 0.0f, const float _rotation = 0.0f) : PhysicsNode(_scale, _depth, _rotation){
+		setPosition(_position);
+	};
+			
 		
 	
 
@@ -40,8 +41,9 @@ public:
 	float getPositionX() const { return position.x; }
 	float getPositionY() const { return position.y; }
 	float getDepth() const { return depth; }
-	float getRotation() const { return rotation; }
 	Vector3 getScale() const { return scale; }
+	Quaternion getQrotation() const { return qrotation; }
+
 	
 	//Vector2 gridToWorldPosition(int gridX, int gridY);
 
@@ -54,8 +56,13 @@ public:
 	void move(const Vector2 delta) { this->position += delta; }
 
 	void setDepth(const float depth) { this->depth = depth; }
-	void setRotation(const float rotation) { this->rotation = rotation; }
-	void updateRotation(const float delta) { this->rotation += delta; }
+	void setRotation(const float rotation){
+		this->qrotation = Quaternion::AxisAngleToQuaternion(Vector3(0, 0, 1), rotation);
+}
+	void setRotation(const Vector2 dir);
+
+
+	void updateRotation(const float delta) { this->qrotation = this->qrotation * Quaternion::AxisAngleToQuaternion(Vector3(0, 0, 1), delta); }
 	void setScale(const Vector3 scale) {this->scale = scale;}
 	void setScaleXY(const float scaleX, const float scaleY){ 
 		this->scale.x = scaleX;
@@ -72,7 +79,7 @@ private:
 	//PhysicsData physicsData;
 	Vector2 position;
 	float depth;
-	float rotation;
+	Quaternion qrotation;
 	Vector3 scale;
 };
 

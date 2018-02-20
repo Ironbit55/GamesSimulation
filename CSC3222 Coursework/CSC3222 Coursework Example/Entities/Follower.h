@@ -11,5 +11,6 @@ public:
 	Follower(const int gridX, const int gridY, const float rotation = 0.0f) : Follower(rotation){
 		this->setGridPosition(gridX, gridY);
 	};
+	virtual void update(float msec);
 };
 

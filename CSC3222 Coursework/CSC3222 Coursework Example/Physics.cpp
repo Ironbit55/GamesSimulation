@@ -1,28 +1,28 @@
 #pragma once
 #include "Physics.h"
+#include "../../nclgl/Window.h"
 
 
 Physics::Physics()
 {
-	numRaiders = 16;
+	numRaiders = 15;
 
 	for (int i = 0; i < numRaiders - 1; i++){
 		float tempRotation = i*20.0f;
 		Follower tempFollower = Follower(24 + i, 15, tempRotation);
 
 		raiders.push_back(tempFollower);
-		raiders.at(i).velocityNode.applyVelocity(Vector2(0.0f, 0.02f));
+		raiders.at(i).physicsNode.setRotation(Vector2(-1, 0));
 	}
 	
 	 //push leader to followers/raider list
+
+	//add leader to raiders
 	leader = Leader(30, 17, 20.0f);
-	raiders.push_back(leader);
-
-	//get pointer to leader
-	Entity* leaderPtr = &raiders.back();
-
-	leaderPtr->velocityNode.applyVelocity(Vector2(0.0f, -0.02f));
-
+	leader.physicsNode.setRotation(Vector2(0, 1));
+	leader.leaderControler.moveForward = true;
+	
+	//leaderPtr->velocityNode.applyVelocity(Vector2(0.0f, -0.02f));
 
 	Vector2 mapPosition = Vector2(0.0f, 0.0f);
 	Vector3 mapScale = Vector3(Map::MAP_IMAGE_HALF_WIDTH, Map::MAP_IMAGE_HALF_HEIGHT, 100.0f);
@@ -31,7 +31,10 @@ Physics::Physics()
 	
 	Vector2 dragonPos = Vector2(-300.0f, 90.0f);
 	dragon = Dragon(dragonPos);
-	dragon.velocityNode.applyVelocity(Vector2(0.0f, 0.02f));
+	dragon.velocityNode.applyVelocity(Vector2(0.0f, -0.02f));
+	Vector2 dir = Vector2(0, 1);
+	dir.Normalise();
+	dragon.physicsNode.setRotation(dir);
 	dragonState = 1;
 
 	Vector2 breathPosition = Vector2(0.0f, -50.0f);
@@ -49,9 +52,16 @@ Physics::~Physics()
 
 void Physics::UpdatePhysics(float msec)
 {
-	for (int i = 0; i < numRaiders; i++){
+	//handle input
+	leader.leaderControler.moveForward = Window::GetKeyboard()->KeyDown(KEYBOARD_UP);
+	leader.leaderControler.rotateLeft = Window::GetKeyboard()->KeyDown(KEYBOARD_LEFT);
+	leader.leaderControler.rotateRight = Window::GetKeyboard()->KeyDown(KEYBOARD_RIGHT);
+
+	for (int i = 0; i < numRaiders - 1; i++){
 		raiders.at(i).update(msec);
 	}
+	
+	leader.update(msec);
 	dragon.update(msec);
 
 
@@ -69,9 +79,9 @@ void Physics::UpdatePhysics(float msec)
 	/* Here, we simply rotate each raider counter-clockwise by a value
 	relative to framerate. */
 
-	for (int i = 0; i < numRaiders; i++)
+	for (int i = 0; i < numRaiders - 1; i++)
 	{
-		raiders.at(i).physicsNode.updateRotation(shift);
+		raiders.at(i).lookAt(dragon.physicsNode.getPosition());
 	}
 
 	/* This segment demonstrates a simple finite state machine. State 1 is
@@ -109,7 +119,7 @@ void Physics::UpdatePhysics(float msec)
 	also inherits its orientation from the dragon - to see this in
 	action, uncomment the line of code below: */
 
-	dragon.physicsNode.updateRotation(-shift);
+	//dragon.physicsNode.updateRotation(-shift);
 
 	/* Lastly, there may be times when we want to control the scale of
 	an object. If that object collides, it makes sense for its physics

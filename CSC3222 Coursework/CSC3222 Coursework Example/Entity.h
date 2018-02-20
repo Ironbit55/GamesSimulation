@@ -40,6 +40,12 @@ public:
 		physicsNode.setPosition(Map::gridToWorldPosition(x, y));
 	}
 
+	void lookAt(Vector2 target){
+		Vector2 dir = target - physicsNode.getPosition();
+		dir.Normalise();
+		physicsNode.setRotation(dir);
+	}
+
 	void setPhysics(){
 		
 	}
@@ -48,11 +54,10 @@ public:
 		
 	}
 
-	void update(float msec){
+	virtual void update(float msec){
 		velocityNode.update(msec);
 	}
 
-	~Entity() {};
 
 	Entity& operator=(const Entity &e){
 

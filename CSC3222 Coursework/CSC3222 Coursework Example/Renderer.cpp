@@ -67,7 +67,7 @@ Renderer::Renderer(Window &parent, Physics* physics) : OGLRenderer(parent) {
 
 	SceneNode * mapNode = new SceneNode();
 	mapNode->SetColour(Vector4(1, 1, 1, 1));
-	mapNode->SetTransform(Matrix4::Translation(p->map.getPosition3d())*Matrix4::Rotation(p->map.getRotation(), Vector3(0,0,1)));
+	mapNode->SetTransform(Matrix4::Translation(p->map.getPosition3d())* p->map.getQrotation().ToMatrix());
 	mapNode->SetModelScale(p->map.getScale());
 	mapNode->SetMesh(map);
 	mapNode->SetBoundingRadius(5.0f);
@@ -78,7 +78,7 @@ Renderer::Renderer(Window &parent, Physics* physics) : OGLRenderer(parent) {
 	SceneNode * dragonNode = new SceneNode();
 	
 	dragonNode->SetColour(Vector4(1, 1, 1, 0.99));
-	dragonNode->SetTransform(Matrix4::Translation(p->dragon.physicsNode.getPosition3d())*Matrix4::Rotation(p->dragon.physicsNode.getRotation(), Vector3(0,0,1)));
+	dragonNode->SetTransform(Matrix4::Translation(p->dragon.physicsNode.getPosition3d()) * p->dragon.physicsNode.getQrotation().ToMatrix());
 	dragonNode->SetModelScale(p->dragon.physicsNode.getScale());
 	dragonNode->SetMesh(dragon);
 	dragonNode->SetBoundingRadius(5.0f);
@@ -93,7 +93,7 @@ Renderer::Renderer(Window &parent, Physics* physics) : OGLRenderer(parent) {
 
 	SceneNode* breathNode = new SceneNode();
 	breathNode->SetColour(Vector4(1, 1, 1, 0.999));
-	breathNode->SetTransform(Matrix4::Translation(p->breath.getPosition3d())*Matrix4::Rotation(p->breath.getRotation(), Vector3(0,0,1)));
+	breathNode->SetTransform(Matrix4::Translation(p->breath.getPosition3d()) * p->breath.getQrotation().ToMatrix());
 	breathNode->SetModelScale(p->breath.getScale());
 	breathNode->SetMesh(breathWeapon);
 	breathNode->SetBoundingRadius(5.0f);
@@ -103,13 +103,22 @@ Renderer::Renderer(Window &parent, Physics* physics) : OGLRenderer(parent) {
 	for (int i = 0; i < p->raiders.size(); ++i) {
 		SceneNode * s = new SceneNode();
 		s->SetColour(Vector4(1, 1, 1, 0.999));
-		s->SetTransform(Matrix4::Translation(p->raiders.at(i).physicsNode.getPosition3d())*Matrix4::Rotation(p->raiders.at(i).physicsNode.getRotation(), Vector3(0,0,1)));
+		s->SetTransform(Matrix4::Translation(p->raiders.at(i).physicsNode.getPosition3d()) * p->raiders.at(i).physicsNode.getQrotation().ToMatrix());
 		s->SetModelScale(p->raiders.at(i).physicsNode.getScale());
 		s->SetMesh(raider);
 		s->SetBoundingRadius(5.0f);
 		s->SetPhysicsNode(&(p->raiders.at(i).physicsNode));
 		root->AddChild(s);
 	}
+
+	SceneNode * s = new SceneNode();
+	s->SetColour(Vector4(1, 1, 1, 0.999));
+	s->SetTransform(Matrix4::Translation(p->leader.physicsNode.getPosition3d()) * p->leader.physicsNode.getQrotation().ToMatrix());
+	s->SetModelScale(p->leader.physicsNode.getScale());
+	s->SetMesh(raider);
+	s->SetBoundingRadius(5.0f);
+	s->SetPhysicsNode(&(p->leader.physicsNode));
+	root->AddChild(s);
 
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_BLEND);

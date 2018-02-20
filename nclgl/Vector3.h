@@ -13,6 +13,8 @@ _-_-_-_-_-_-_-""  ""
 */
 #include <cmath>
 #include <iostream>
+#include "Vector2.h"
+
 //#include "Vector2.h"
 
 class Vector3	{
@@ -25,6 +27,12 @@ public:
 		this->x = x;
 		this->y = y;
 		this->z = z;
+	}
+
+	Vector3(const Vector2 vec2) {
+		this->x = vec2.x;
+		this->y = vec2.y;
+		this->z = 0.0f;
 	}
 
 	~Vector3(void){}

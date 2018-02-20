@@ -46,7 +46,8 @@ public:
 	void		GenerateW();	//builds 4th component when loading in shortened, 3 component quaternions
 
 	static Quaternion EulerAnglesToQuaternion(float pitch, float yaw, float roll);
-	static Quaternion AxisAngleToQuaterion(const Vector3& vector, float degrees);
+	static Quaternion AxisAngleToQuaternion(const Vector3& vector, float degrees);
+	static Quaternion AxisAngleRadsToQuaternion(const Vector3& vector, float radians);
 
 	static void RotatePointByQuaternion(const Quaternion &q, Vector3 &point);
 

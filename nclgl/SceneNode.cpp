@@ -34,7 +34,7 @@ void	SceneNode::Update(float msec) {
 	if (parent) {
 		SetModelScale(physicsNode->getScale());
 
-		SetTransform(Matrix4::Translation(physicsNode->getPosition3d())*Matrix4::Rotation(physicsNode->getRotation(), Vector3(0, 0, 1)));
+		SetTransform(Matrix4::Translation(physicsNode->getPosition3d())* physicsNode->getQrotation().ToMatrix());
 		
 		//we don't want node to inherit depth of parent, not sure how to do this
 		worldTransform = parent->worldTransform * transform;
