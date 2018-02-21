@@ -10,5 +10,10 @@ public:
 	Dragon(const int gridX, const int gridY, const float rotation = 0.0f) : Dragon(rotation){
 		this->setGridPosition(gridX, gridY);
 	};
+
+	void update(float msec) override;
+
+	Vector2 targetLocation;
+	bool moveToTarget;
 };
 

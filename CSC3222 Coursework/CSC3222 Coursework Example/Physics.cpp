@@ -31,7 +31,7 @@ Physics::Physics()
 	
 	Vector2 dragonPos = Vector2(-300.0f, 90.0f);
 	dragon = Dragon(dragonPos);
-	dragon.velocityNode.applyVelocity(Vector2(0.0f, -0.02f));
+
 	Vector2 dir = Vector2(0, 1);
 	dir.Normalise();
 	dragon.physicsNode.setRotation(dir);
@@ -56,6 +56,12 @@ void Physics::UpdatePhysics(float msec)
 	leader.leaderControler.moveForward = Window::GetKeyboard()->KeyDown(KEYBOARD_UP);
 	leader.leaderControler.rotateLeft = Window::GetKeyboard()->KeyDown(KEYBOARD_LEFT);
 	leader.leaderControler.rotateRight = Window::GetKeyboard()->KeyDown(KEYBOARD_RIGHT);
+
+	if(Window::GetKeyboard()->KeyTriggered(KEYBOARD_F)){
+		dragon.moveToTarget = !dragon.moveToTarget;
+	}
+
+	dragon.targetLocation = leader.physicsNode.getPosition();
 
 	for (int i = 0; i < numRaiders - 1; i++){
 		raiders.at(i).update(msec);
@@ -105,11 +111,11 @@ void Physics::UpdatePhysics(float msec)
 
 	if (dragonState == 1)
 	{
-		dragon.physicsNode.moveX(shift);
+		//dragon.physicsNode.moveX(shift);
 	}
 	else
 	{
-		dragon.physicsNode.moveX(-shift);
+		//dragon.physicsNode.moveX(-shift);
 	}
 
 	/* Note also, as highlighted in the comments in Renderer.cpp, that

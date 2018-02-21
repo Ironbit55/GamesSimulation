@@ -58,6 +58,11 @@ public:
 		}
 	}
 
+	static Vector2 Normalise(Vector2 vec){
+		vec.Normalise();
+		return vec;
+	}
+
 	
 	inline float Length() const {
 		return sqrt((x*x) + (y*y));

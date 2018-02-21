@@ -52,6 +52,11 @@ public:
 		}
 	}
 
+	static Vector3 Normalise(Vector3 vec) {
+		vec.Normalise();
+		return vec;
+	}
+
 	void		ToZero() {
 		x = y = z = 0.0f;
 	}

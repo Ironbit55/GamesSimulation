@@ -43,6 +43,16 @@ public:
 	float getDepth() const { return depth; }
 	Vector3 getScale() const { return scale; }
 	Quaternion getQrotation() const { return qrotation; }
+	Vector2 getForwardDirection() const{
+		//default foward is up in y
+		Vector3 forward = Vector3(0, 1, 0);
+
+		//rotate foward direction by rotation quaternion
+		Quaternion::RotatePointByQuaternion(getQrotation(), forward);
+		//foward now points in direction we are facing
+		
+		return Vector2(forward.x, forward.y);
+	}
 
 	
 	//Vector2 gridToWorldPosition(int gridX, int gridY);
