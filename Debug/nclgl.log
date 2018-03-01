@@ -1,18 +1,18 @@
-﻿  SceneNode.cpp
-  Generating Code...
-  Compiling...
-  Window.cpp
+﻿  Window.cpp
   Shader.cpp
+  SceneNode.cpp
   Quaternion.cpp
   Plane.cpp
   OGLRenderer.cpp
   OBJMesh.cpp
+  Mouse.cpp
   Mesh.cpp
-  Matrix4.cpp
   MD5Node.cpp
   MD5Mesh.cpp
   MD5FileData.cpp
   MD5Anim.cpp
+  Matrix4.cpp
+  Keyboard.cpp
   HeightMap.cpp
 h:\githubvisualstudio\gamessimulation\nclgl\heightmap.cpp(8): warning C4244: '=': conversion from 'float' to 'GLuint', possible loss of data
 h:\githubvisualstudio\gamessimulation\nclgl\heightmap.cpp(9): warning C4244: '=': conversion from 'float' to 'GLuint', possible loss of data
@@ -21,6 +21,7 @@ h:\githubvisualstudio\gamessimulation\nclgl\heightmap.cpp(31): warning C4244: 'i
 h:\githubvisualstudio\gamessimulation\nclgl\heightmap.cpp(32): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
 h:\githubvisualstudio\gamessimulation\nclgl\heightmap.cpp(33): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
 h:\githubvisualstudio\gamessimulation\nclgl\heightmap.cpp(34): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  GameTimer.cpp
   Frustum.cpp
   CubeRobot.cpp
   Camera.cpp
