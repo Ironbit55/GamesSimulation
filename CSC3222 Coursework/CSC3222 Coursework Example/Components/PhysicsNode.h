@@ -83,6 +83,12 @@ public:
 		this->scale.y += deltaY;
 	}
 
+	float getBoundingCircle() const { return boundingCircleRadius; }
+
+	void setBoundingCircle(const float radius){
+		boundingCircleRadius = radius;
+	}
+
 	~PhysicsNode() {};
 
 private:
@@ -91,5 +97,6 @@ private:
 	float depth;
 	Quaternion qrotation;
 	Vector3 scale;
+	float boundingCircleRadius;
 };
 

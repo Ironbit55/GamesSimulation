@@ -13,5 +13,7 @@ void Dragon::update(float msec){
 
 	//could also set velocity in direction of target
 	//and rotate according to dir
+
+
 	Entity::update(msec);
 }

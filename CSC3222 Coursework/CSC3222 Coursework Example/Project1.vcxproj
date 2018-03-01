@@ -115,6 +115,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Entities\Dragon.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Entities\Follower.cpp" />
@@ -128,6 +129,7 @@
     <ClCompile Include="Components\VelocityNode.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Entities\Dragon.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Entities\Follower.h" />

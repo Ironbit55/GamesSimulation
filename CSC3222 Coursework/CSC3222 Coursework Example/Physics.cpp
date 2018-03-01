@@ -1,6 +1,7 @@
 #pragma once
 #include "Physics.h"
 #include "../../nclgl/Window.h"
+#include "CollisionManager.h"
 
 
 Physics::Physics()
@@ -13,6 +14,7 @@ Physics::Physics()
 
 		raiders.push_back(tempFollower);
 		raiders.at(i).physicsNode.setRotation(Vector2(-1, 0));
+		raiders.at(i).followLeader = true;
 	}
 	
 	 //push leader to followers/raider list
@@ -64,7 +66,24 @@ void Physics::UpdatePhysics(float msec)
 	dragon.targetLocation = leader.physicsNode.getPosition();
 
 	for (int i = 0; i < numRaiders - 1; i++){
-		raiders.at(i).update(msec);
+		//point follower to look at dragon
+		//this should probably be in follower update logic
+		Follower& followerA = raiders.at(i);
+		followerA.lookAt(dragon.physicsNode.getPosition());
+		followerA.leaderLocation = leader.physicsNode.getPosition();
+
+		followerA.update(msec);
+		followerA.followLeader = true;
+		//check raider raider collision
+		
+		for (int k = 0; k < numRaiders - 1; k++) {
+			Follower& followerB = raiders.at(k);
+			if(i != k && CollisionManager::circleCircleCollision(followerA.physicsNode, followerB.physicsNode)){
+				//followers are colliding
+				followerA.followLeader = false;
+				followerB.followLeader = false;
+			}
+		}
 	}
 	
 	leader.update(msec);
@@ -82,13 +101,7 @@ void Physics::UpdatePhysics(float msec)
 
 	shift = 0.3*msec;
 
-	/* Here, we simply rotate each raider counter-clockwise by a value
-	relative to framerate. */
 
-	for (int i = 0; i < numRaiders - 1; i++)
-	{
-		raiders.at(i).lookAt(dragon.physicsNode.getPosition());
-	}
 
 	/* This segment demonstrates a simple finite state machine. State 1 is
 	analogous to 'move right'. Once the dragon has moved right beyond a

@@ -172,13 +172,15 @@ void	Renderer::DrawNode(SceneNode*n) {
 		glUniform1i(glGetUniformLocation(currentShader->GetProgram(), "useTexture"), (int)n->GetMesh()->GetTexture());
 		GL_BREAKPOINT
 
-			n->GetMesh()->Draw();
+		n->GetMesh()->Draw();
 	}
 }
 
 void	Renderer::BuildNodeLists(SceneNode* from) {
 	Vector3 direction = from->GetWorldTransform().GetPositionVector() - camera->GetPosition();
-	from->SetCameraDistance(Vector3::Dot(direction, direction));
+	from->SetCameraDistance(Vector3::Dot(direction, direction)); //what? does dot product of the same vector equal the length?
+																//ah it actually equals the the length squared. so its always positive i guess got it.
+																//aaalthough wouldn't you want to detect something as behind the camera...
 
 	if (frameFrustum.InsideFrustum(*from)) {
 		if (from->GetColour().w < 1.0f) {
