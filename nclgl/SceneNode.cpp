@@ -33,6 +33,7 @@ bool	SceneNode::CompareByZ(SceneNode*a, SceneNode*b) {
 void	SceneNode::Update(float msec) {
 	if (parent) {
 		SetModelScale(physicsNode->getScale());
+		//SetColour(physicsNode->colour);
 
 		SetTransform(Matrix4::Translation(physicsNode->getPosition3d())* physicsNode->getQrotation().ToMatrix());
 		

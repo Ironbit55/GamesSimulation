@@ -13,6 +13,12 @@ structure entirely (for example with a class to allow inclusion of embedded func
 aware that doing so might require some slight doctoring of Renderer::Renderer() and
 SceneNode::Update() */
 
+struct CollisionData {
+	Vector2 contactPoint;
+	Vector2 contactNormal;
+	float peneterationDepth;
+};
+
 struct PhysicsData {
 	Vector3 position;
 	float rotation;
@@ -25,7 +31,8 @@ public:
 	PhysicsNode(const Vector3 _scale = Vector3(100.0f, 100.0f, 100.0f), const float _depth = 0.0f, const float _rotation = 0.0f)
 		: position(Vector2(0.0f, 0.0f)),
 		depth(_depth),
-		scale(_scale){
+		scale(_scale),
+		colour(1, 1, 1, 0.999) {
 		setRotation(_rotation);
 	};
 
@@ -91,6 +98,8 @@ public:
 
 	~PhysicsNode() {};
 
+	//yeah I'm not convinced this should go here but... whatever
+	Vector4 colour;
 private:
 	//PhysicsData physicsData;
 	Vector2 position;

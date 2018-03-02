@@ -77,7 +77,7 @@ Renderer::Renderer(Window &parent, Physics* physics) : OGLRenderer(parent) {
 
 	SceneNode * dragonNode = new SceneNode();
 	
-	dragonNode->SetColour(Vector4(1, 1, 1, 0.99));
+	dragonNode->SetColour(p->dragon.physicsNode.colour);
 	dragonNode->SetTransform(Matrix4::Translation(p->dragon.physicsNode.getPosition3d()) * p->dragon.physicsNode.getQrotation().ToMatrix());
 	dragonNode->SetModelScale(p->dragon.physicsNode.getScale());
 	dragonNode->SetMesh(dragon);
@@ -102,7 +102,7 @@ Renderer::Renderer(Window &parent, Physics* physics) : OGLRenderer(parent) {
 
 	for (int i = 0; i < p->raiders.size(); ++i) {
 		SceneNode * s = new SceneNode();
-		s->SetColour(Vector4(1, 1, 1, 0.999));
+		s->SetColour(p->raiders.at(i).physicsNode.colour);
 		s->SetTransform(Matrix4::Translation(p->raiders.at(i).physicsNode.getPosition3d()) * p->raiders.at(i).physicsNode.getQrotation().ToMatrix());
 		s->SetModelScale(p->raiders.at(i).physicsNode.getScale());
 		s->SetMesh(raider);

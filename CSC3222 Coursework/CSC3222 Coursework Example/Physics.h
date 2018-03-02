@@ -12,7 +12,6 @@
 using std::vector;
 
 
-
 /* Our placeholder physics system includes an update function, and physics data for each entity
 in our environment. We also include a single integer to inform the dragon's behaviour and breath
 weapon scaling.*/

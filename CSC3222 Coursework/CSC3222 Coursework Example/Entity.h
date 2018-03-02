@@ -1,6 +1,7 @@
 #pragma once
 #include "Components/PhysicsNode.h"
 #include "Components/VelocityNode.h"
+#include "Components/CollidableNode.h"
 
 class Entity
 {
@@ -10,7 +11,8 @@ public:
 		: physicsNode(Vector3(scaleX, scaleY, 1.0f), depth, rotation), 
 		velocityNode(&physicsNode, mass, maxSpeed),
 		aggroRange(aggroRange),
-		entitiesInRange(0) {};
+		entitiesInRange(0),
+		collidableNode(){};
 
 
 	Entity(const Vector2 position, const float aggroRange, const float scaleX, const float scaleY, const float maxSpeed, const float mass = 1.0f, const float depth = 0, const float rotation = 0.0f)
@@ -19,7 +21,7 @@ public:
 		this->physicsNode.setPosition(position);
 	}
 
-	Entity(const Entity& src) : physicsNode(src.physicsNode), velocityNode(src.velocityNode), aggroRange(src.aggroRange), entitiesInRange(src.entitiesInRange) {
+	Entity(const Entity& src) : physicsNode(src.physicsNode), velocityNode(src.velocityNode), collidableNode(src.collidableNode), aggroRange(src.aggroRange), entitiesInRange(src.entitiesInRange) {
 		//velocity node should point to this entities physics node
 		velocityNode.setPhysicsNode(&physicsNode);
 	}
@@ -54,6 +56,7 @@ public:
 		
 	}
 
+
 	virtual void update(float msec){
 		velocityNode.update(msec);
 	}
@@ -66,6 +69,7 @@ public:
 			return *this;
 
 		physicsNode = e.physicsNode;
+		collidableNode = e.collidableNode;
 
 		//we want the pointer to point to the physics node belonging to this entity
 		//could also just not change the pointer but this makes it more obvious.
@@ -77,7 +81,26 @@ public:
 	}
 
 	PhysicsNode physicsNode;
+
+	//make these pointers
+	//do not update if null pointer
+	//this way we have a horrible hacky pluggable component system yay
 	VelocityNode velocityNode;
+	CollidableNode collidableNode;
+
+	//use to add/remove "components"
+	void setVelocityNode();
+
+	void removeVelocityNode();
+
+	void setCollidableNode(float boundingRadius, bool fixed = true);
+
+	void removeCollidableNode();
+
+
+	//we will maybe get around to using this eventually
+	//vector<Entity> children;
+
 private:
 	float aggroRange;
 	int entitiesInRange;

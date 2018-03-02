@@ -1,11 +1,23 @@
-﻿  LINK : C:\Users\Edward\Documents\GitHubVisualStudio\GamesSimulation\CSC3222 Coursework\Debug\CSC3222 Coursework Framework.exe not found or not built by the last incremental link; performing full link
-Renderer.obj : warning LNK4049: locally defined symbol ___glewGetUniformLocation imported
-Renderer.obj : warning LNK4049: locally defined symbol ___glewUniform1i imported
-Renderer.obj : warning LNK4049: locally defined symbol ___glewUniform4fv imported
-Renderer.obj : warning LNK4049: locally defined symbol ___glewUniformMatrix4fv imported
-Renderer.obj : warning LNK4049: locally defined symbol ___glewUseProgram imported
-Renderer.obj : warning LNK4049: locally defined symbol ___glewUniform4uiv imported
-glew32.lib(glew.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'glew32.lib(glew.obj)' or at 'C:\Users\Edward\Documents\GitHubVisualStudio\GamesSimulation\CSC3222 Coursework\Debug\vc120.pdb'; linking object as if no debug info
-nclgl.lib(Quaternion.obj) : warning LNK4204: 'C:\Users\Edward\Documents\GitHubVisualStudio\GamesSimulation\CSC3222 Coursework\Debug\nclgl.pdb' is missing debugging information for referencing module; linking object as if no debug info
-  Project1.vcxproj -> C:\Users\Edward\Documents\GitHubVisualStudio\GamesSimulation\CSC3222 Coursework\Debug\CSC3222 Coursework Framework.exe
-  Project1.vcxproj -> C:\Users\Edward\Documents\GitHubVisualStudio\GamesSimulation\CSC3222 Coursework\Debug\CSC3222 Coursework Framework.pdb (Partial PDB)
+﻿  Follower.cpp
+h:\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\components\physicsnode.h(35): warning C4305: 'argument': truncation from 'double' to 'float'
+  Generating Code...
+  Compiling...
+  main.cpp
+h:\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\components\physicsnode.h(35): warning C4305: 'argument': truncation from 'double' to 'float'
+  Renderer.cpp
+h:\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\components\physicsnode.h(35): warning C4305: 'argument': truncation from 'double' to 'float'
+h:\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\renderer.cpp(95): warning C4305: 'argument': truncation from 'double' to 'float'
+h:\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\renderer.cpp(103): warning C4018: '<': signed/unsigned mismatch
+h:\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\renderer.cpp(115): warning C4305: 'argument': truncation from 'double' to 'float'
+  Physics.cpp
+h:\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\components\physicsnode.h(35): warning C4305: 'argument': truncation from 'double' to 'float'
+h:\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\collisionmanager.h(3): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+h:\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\collisionmanager.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+h:\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\physics.cpp(110): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+h:\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\physics.cpp(122): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+h:\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\physics.cpp(171): warning C4244: 'argument': conversion from 'double' to 'const float', possible loss of data
+  Leader.cpp
+h:\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\components\physicsnode.h(35): warning C4305: 'argument': truncation from 'double' to 'float'
+  Generating Code...
+  Project1.vcxproj -> H:\githubvisualstudio\GamesSimulation\CSC3222 Coursework\Debug\CSC3222 Coursework Framework.exe
+  Project1.vcxproj -> H:\githubvisualstudio\GamesSimulation\CSC3222 Coursework\Debug\CSC3222 Coursework Framework.pdb (Partial PDB)

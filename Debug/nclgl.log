@@ -1,6 +1,7 @@
 ﻿  Window.cpp
   Shader.cpp
   SceneNode.cpp
+h:\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\components\physicsnode.h(35): warning C4305: 'argument': truncation from 'double' to 'float'
   Quaternion.cpp
   Plane.cpp
   OGLRenderer.cpp
@@ -8,6 +9,7 @@
   Mouse.cpp
   Mesh.cpp
   MD5Node.cpp
+h:\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\components\physicsnode.h(35): warning C4305: 'argument': truncation from 'double' to 'float'
   MD5Mesh.cpp
   MD5FileData.cpp
   MD5Anim.cpp
@@ -23,7 +25,9 @@ h:\githubvisualstudio\gamessimulation\nclgl\heightmap.cpp(33): warning C4244: 'i
 h:\githubvisualstudio\gamessimulation\nclgl\heightmap.cpp(34): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
   GameTimer.cpp
   Frustum.cpp
+h:\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\components\physicsnode.h(35): warning C4305: 'argument': truncation from 'double' to 'float'
   CubeRobot.cpp
+h:\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\components\physicsnode.h(35): warning C4305: 'argument': truncation from 'double' to 'float'
   Camera.cpp
   Generating Code...
   nclgl.vcxproj -> H:\githubvisualstudio\GamesSimulation\CSC3222 Coursework\Debug\nclgl.lib

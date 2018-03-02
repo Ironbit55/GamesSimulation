@@ -65,6 +65,7 @@ void Physics::UpdatePhysics(float msec)
 
 	dragon.targetLocation = leader.physicsNode.getPosition();
 
+	CollisionData collisionData;
 	for (int i = 0; i < numRaiders - 1; i++){
 		//point follower to look at dragon
 		//this should probably be in follower update logic
@@ -74,14 +75,18 @@ void Physics::UpdatePhysics(float msec)
 
 		followerA.update(msec);
 		followerA.followLeader = true;
+		
 		//check raider raider collision
 		
 		for (int k = 0; k < numRaiders - 1; k++) {
 			Follower& followerB = raiders.at(k);
-			if(i != k && CollisionManager::circleCircleCollision(followerA.physicsNode, followerB.physicsNode)){
+			if(i != k && CollisionManager::entityCircleInterfaceDetection(followerA, followerB, collisionData)){
 				//followers are colliding
 				followerA.followLeader = false;
+				followerA.physicsNode.colour = Vector4(1.0f, 0.5f, 0.2f, 0.999f);
 				followerB.followLeader = false;
+				followerB.physicsNode.colour = Vector4(1.0f, 0.5f, 0.2f, 0.999f);
+
 			}
 		}
 	}
@@ -89,6 +94,9 @@ void Physics::UpdatePhysics(float msec)
 	leader.update(msec);
 	dragon.update(msec);
 
+	//ideally loop through all entities
+	//if collidable then detect collision and respond
+	//if two collidables are children (or hackily: both fixed) then don't collide
 
 	/* Placeholder functionality to show things moving on screen
 	Note that our physics update is parcelled away from our renderer. So

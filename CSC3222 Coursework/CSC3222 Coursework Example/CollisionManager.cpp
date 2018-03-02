@@ -22,6 +22,32 @@ bool CollisionManager::circleCircleCollision(PhysicsNode& c1, PhysicsNode& c2){
 	
 }
 
+bool CollisionManager::entityCircleInterfaceDetection(Entity& e1, Entity& e2, CollisionData& collisionDataOut){
+	//check collidables here
+	if (e1.collidableNode.isFixed && e2.collidableNode.isFixed) {
+		return false;
+	}
+
+	Vector2 originDistance = e2.physicsNode.getPosition() - e1.physicsNode.getPosition();
+
+	float penetrationDepth = (e1.collidableNode.boundingRadius + e2.collidableNode.boundingRadius) - originDistance.Length();
+
+	//on no collision
+	//we don't bother changing collisionDataOut at all...
+	//is this right?
+	if (penetrationDepth < 0.0f) {	//have some floating point tolerence here?
+		return false;
+	}
+
+	//there is an overlap so fill up collision data
+
+	collisionDataOut.contactNormal = Vector2::Normalise(originDistance);
+	collisionDataOut.contactPoint = e1.physicsNode.getPosition() + (collisionDataOut.contactNormal * e2.collidableNode.boundingRadius);
+	collisionDataOut.peneterationDepth = penetrationDepth;
+
+	return true;
+}
+
 //bool CollisionManager::squareSquareCollision(Square* s1, Square* s2){
 //	//cout << "square square collision check" << "\n";
 //	//if s1 bottom edge is higher than s2 top ege then no collision

@@ -8,6 +8,18 @@ public:
 
 	void update(float msec);
 	void applyForce(Vector2 applyForce);
+
+	void applyImpulse(const Vector2 f) {
+		applyVelocity(f);
+	}
+
+	void applyImpulse(const Vector2 dir, const float magnitude) {
+		
+		//dir.Normalise();
+		applyVelocity(dir * magnitude);
+	}
+
+
 	void applyVelocity(const Vector2 applyVelocity){
 		velocity += Vector3(applyVelocity);
 	}
@@ -15,6 +27,7 @@ public:
 		
 		velocity += Vector3(dir * amount);
 	}
+
 	void setVelocity(const Vector2 v){
 		velocity = v;
 	}

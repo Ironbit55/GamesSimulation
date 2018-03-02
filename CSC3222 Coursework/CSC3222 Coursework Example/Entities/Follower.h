@@ -5,7 +5,9 @@ class Follower :
 {
 public:
 	Follower(const float rotation = 0.0f) : Entity(0.0f, 10.0f, 10.0f, 5.0f, 1.0f, -199.9f, rotation){
-		physicsNode.setBoundingCircle(4.0f);
+		//physicsNode.setBoundingCircle(4.0f);
+		collidableNode.boundingRadius = 5.0f;
+		collidableNode.isFixed = false;
 	};
 	Follower(const Vector2 pos, const float rotation = 0.0f) : Follower(rotation){
 		physicsNode.setPosition(pos);
