@@ -10,8 +10,9 @@ Physics::Physics()
 
 	for (int i = 0; i < numRaiders - 1; i++){
 		float tempRotation = i*20.0f;
-		Follower tempFollower = Follower(24 + i, 15, tempRotation);
+		Follower tempFollower = Follower(13 + i * 2, 20 - i, tempRotation);
 
+		tempFollower.velocityNode.applyForce(Vector2(0, 1) * 10.0f);
 		raiders.push_back(tempFollower);
 		raiders.at(i).physicsNode.setRotation(Vector2(-1, 0));
 		raiders.at(i).followLeader = true;
@@ -20,7 +21,7 @@ Physics::Physics()
 	 //push leader to followers/raider list
 
 	//add leader to raiders
-	leader = Leader(30, 17, 20.0f);
+	leader = Leader(30, 20, 20.0f);
 	leader.physicsNode.setRotation(Vector2(0, 1));
 	leader.leaderControler.moveForward = true;
 	
@@ -82,11 +83,11 @@ void Physics::UpdatePhysics(float msec)
 			Follower& followerB = raiders.at(k);
 			if(i != k && CollisionManager::entityCircleInterfaceDetection(followerA, followerB, collisionData)){
 				//followers are colliding
-				followerA.followLeader = false;
+				//followerA.followLeader = false;
 				followerA.physicsNode.colour = Vector4(1.0f, 0.5f, 0.2f, 0.999f);
-				followerB.followLeader = false;
+				//followerB.followLeader = false;
 				followerB.physicsNode.colour = Vector4(1.0f, 0.5f, 0.2f, 0.999f);
-
+				CollisionManager::resolveCollision(followerA, followerB, collisionData);
 			}
 		}
 	}

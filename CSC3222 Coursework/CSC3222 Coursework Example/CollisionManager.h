@@ -16,9 +16,9 @@ public:
 	bool static entityCircleInterfaceDetection(Entity& e1, Entity& e2, CollisionData& collisionDataOut);
 
 	//returns impluse j
-	float static calculateCollisionImpulse(CollisionData data);
+	float static calculateCollisionImpulse(Entity& e1, Entity& e2, CollisionData data);
 
-	bool static resolveCollision(Entity& e1, Entity& e2, CollisionData data);
+	void static resolveCollision(Entity& e1, Entity& e2, CollisionData data);
 
 	//bool static squareSquareCollision(Square* s1, Square* s2);
 

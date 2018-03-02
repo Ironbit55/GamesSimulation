@@ -10,10 +10,12 @@ void Follower::update(float msec){
 	//tell entity to look at target
 	//then move foward, (therefore toward target)
 	//lookAt(leaderLocation);
+
 	Vector2 toLeaderDir = leaderLocation - physicsNode.getPosition();
 	toLeaderDir.Normalise();
 	if (followLeader) {
-		velocityNode.setVelocity(toLeaderDir, 0.04f);
+		//velocityNode.applyVelocity(toLeaderDir, 0.04f);
+		velocityNode.applyForce(toLeaderDir * 100.0f);
 	} else {
 		velocityNode.setVelocity(Vector2(0.0f, 0.0f));
 	}

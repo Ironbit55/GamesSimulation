@@ -3,7 +3,7 @@
 void Leader::update(float msec){
 	
 	if(leaderControler.moveForward){
-		velocityNode.setVelocity(physicsNode.getForwardDirection(), 0.10f);
+		velocityNode.setVelocity(physicsNode.getForwardDirection(), 27.0f);
 	}else{
 		//a little hacky but...
 		velocityNode.setVelocity(Vector2(0.0f, 0.0f));

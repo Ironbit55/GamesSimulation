@@ -6,7 +6,7 @@ void Dragon::update(float msec){
 	//then move foward, (therefore toward target)
 	lookAt(targetLocation);
 	if (moveToTarget) {
-		velocityNode.setVelocity(physicsNode.getForwardDirection(), 0.04f);
+		velocityNode.setVelocity(physicsNode.getForwardDirection(), 27.0f * 3);
 	}else{
 		velocityNode.setVelocity(Vector2(0.0f, 0.0f));
 	}

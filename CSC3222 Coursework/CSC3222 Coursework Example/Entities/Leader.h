@@ -12,7 +12,7 @@ class Leader :
 	public Follower {
 public:
 	Leader(const Vector2 pos = Vector2(0.0f, 0.0f), const float rotation = 0.0f) : Follower(pos, rotation), leaderControler({ false, false, false }) {
-		//velocityNode.setMaxSpeed(5.0f);
+		velocityNode.setMaxSpeed(1000.0f);
 	};
 	Leader(const int gridX, const int gridY, const float rotation = 0.0f) : Follower(gridX, gridY, rotation), leaderControler({ false, false, false }) {
 

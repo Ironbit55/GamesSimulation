@@ -9,7 +9,7 @@ public:
 
 	Entity(const float aggroRange, const float scaleX, const float scaleY, const float maxSpeed, const float mass = 1.0f, const float depth = 0, const float rotation = 0.0f) 
 		: physicsNode(Vector3(scaleX, scaleY, 1.0f), depth, rotation), 
-		velocityNode(&physicsNode, mass, maxSpeed),
+		velocityNode(&physicsNode, maxSpeed, mass),
 		aggroRange(aggroRange),
 		entitiesInRange(0),
 		collidableNode(){};

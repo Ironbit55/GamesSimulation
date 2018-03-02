@@ -48,6 +48,68 @@ bool CollisionManager::entityCircleInterfaceDetection(Entity& e1, Entity& e2, Co
 	return true;
 }
 
+float CollisionManager::calculateCollisionImpulse(Entity& eA, Entity& eB, CollisionData data){
+	//must both be collidable
+	//this might get wierd if both fixed
+
+	//if fixed entity has no velocity and infinite mass
+	Vector2 velocityA = Vector2(0, 0);
+	float inverseMassA = 0;
+	float elasticityA = eA.collidableNode.elasticity;
+
+
+	if(!eA.collidableNode.isFixed){	//is not fixed means entity does have a configured velocity ndoe
+		velocityA = eA.velocityNode.getVelocity();
+		inverseMassA = eA.velocityNode.getInverseMass();
+	}
+
+	//same proccess for entity 2
+
+	Vector2 velocityB = Vector2(0, 0);
+	float inverseMassB = 0;
+	float elasticityB = eA.collidableNode.elasticity;
+
+	if (!eB.collidableNode.isFixed) {
+		velocityB = eB.velocityNode.getVelocity();
+		inverseMassB = eB.velocityNode.getInverseMass();
+	}
+
+	//get avg elasticity
+	//elasticity should always be between 0 and 1 then avg is also
+
+	float elasticity = (eA.collidableNode.elasticity + eB.collidableNode.elasticity) / 2;
+
+	Vector2 velocityAB = velocityA - velocityB;
+
+	//the top of the impulse equation
+
+	float velocityAlongNormal = -(1 + elasticity) * Vector2::Dot(velocityAB, data.contactNormal);
+
+	//the bottom of the impluse equation
+	//don't really know what this represents tbh related to momentum?
+	float momentumPortion = Vector2::Dot(data.contactNormal, data.contactNormal) * (inverseMassA + inverseMassB);
+
+	float impulse = velocityAlongNormal / momentumPortion;
+
+	return impulse;
+
+}
+
+void CollisionManager::resolveCollision(Entity& e1, Entity& e2, CollisionData data){
+	float impulse = calculateCollisionImpulse(e1, e2, data);
+
+	//don't need to apply impulse if collidable is fixed
+	//entity with infinite mass would not be moved anyway
+	if(!e1.collidableNode.isFixed){	//non fixed entities *should" always have a velocityNode
+		e1.velocityNode.applyImpulse(data.contactNormal, impulse);
+	}
+
+	if(!e2.collidableNode.isFixed){
+		e2.velocityNode.applyImpulse(-data.contactNormal, impulse);
+	}
+}
+
+
 //bool CollisionManager::squareSquareCollision(Square* s1, Square* s2){
 //	//cout << "square square collision check" << "\n";
 //	//if s1 bottom edge is higher than s2 top ege then no collision
