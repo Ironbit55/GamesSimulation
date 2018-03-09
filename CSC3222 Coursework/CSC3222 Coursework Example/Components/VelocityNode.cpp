@@ -15,6 +15,7 @@ void VelocityNode::update(float msec){
 	velocity = velocity * (drag);
 	//limit velocity accordng to max speed
 
+
 	float currentSpeed = velocity.Length();
 	if (currentSpeed > maxSpeed){
 		velocity.Normalise();

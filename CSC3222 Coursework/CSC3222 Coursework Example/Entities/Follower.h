@@ -1,5 +1,7 @@
 #pragma once
 #include "../Entity.h"
+
+
 class Follower :
 	public Entity
 {
@@ -19,5 +21,14 @@ public:
 
 	Vector2 leaderLocation;
 	bool followLeader;
+
+	void setTerrainType(TileType terrain) {
+		terrainType = terrain;
+	}
+
+protected:
+	TileType terrainType;
+
+	void limitVelocityByTerrain();
 };
 

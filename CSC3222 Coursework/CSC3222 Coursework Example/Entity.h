@@ -42,6 +42,7 @@ public:
 		physicsNode.setPosition(Map::gridToWorldPosition(x, y));
 	}
 
+
 	void lookAt(Vector2 target){
 		Vector2 dir = target - physicsNode.getPosition();
 		dir.Normalise();
@@ -100,10 +101,13 @@ public:
 
 	//we will maybe get around to using this eventually
 	//vector<Entity> children;
+protected:
+	float feetToPixels(float feet) {
+		return (feet  * Map::GRID_SIZE) / 5;
+	}
 
 private:
 	float aggroRange;
 	int entitiesInRange;
-
 };
 
