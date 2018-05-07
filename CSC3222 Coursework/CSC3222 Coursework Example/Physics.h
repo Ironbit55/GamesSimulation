@@ -22,12 +22,24 @@ public:
 	~Physics();
 
 	void UpdatePhysics(float msec);
+	bool loadTileMap();
+	TileType getTileAt(int x, int y) {
+		if (x > 0 && y > 0 && x < Map::TILES_X && y < Map::TILES_Y) {
+			int flippedY = Map::TILES_Y - y;
+			return tileMap[flippedY * Map::TILES_X + x];
+		}
+		return INVALID_TILE;
+
+		
+	}
 
 	PhysicsNode map;
 	Dragon dragon;
 	PhysicsNode breath;
 	vector<Follower> raiders;
 	Leader leader;
+	TileType* tileMap;
+
 	
 private:
 	int numRaiders;

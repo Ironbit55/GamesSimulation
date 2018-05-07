@@ -3,9 +3,37 @@
 #include "../../nclgl/Window.h"
 #include "CollisionManager.h"
 
+bool Physics::loadTileMap() {
+	
+	ifstream mapfile("tileMap.txt");;
+	string empty;
+	if (!mapfile.is_open()){
+		cout << "Unable to open file";
+		return false;
+	}
 
+
+	tileMap = new TileType[Map::TILES_X *  Map::TILES_Y];
+
+	//for (int x = 0; x < Map::TILES_X; x++) {
+	//	tileMap[x] = new char[Map::TILES_Y];
+	//}
+
+	for (int y = 0; y < Map::TILES_Y; y++) {
+		for (int x = 0; x < Map::TILES_X; x++) {
+			char tile;
+			mapfile >> tile;
+
+			tileMap[(y * Map::TILES_X) + x] = Map::charToTile(tile);
+		}
+
+		getline(mapfile, empty);
+	}
+
+}
 Physics::Physics()
 {
+	loadTileMap();
 	numRaiders = 15;
 
 	for (int i = 0; i < numRaiders - 1; i++){
@@ -21,9 +49,12 @@ Physics::Physics()
 	 //push leader to followers/raider list
 
 	//add leader to raiders
-	leader = Leader(30, 20, 20.0f);
+	leader = Leader(30, 15, 20.0f);
 	leader.physicsNode.setRotation(Vector2(0, 1));
 	leader.leaderControler.moveForward = true;
+
+	int testX = Map::worldToGridPositionX(leader.physicsNode.getPositionX());
+	int testY = Map::worldToGridPositionY(leader.physicsNode.getPositionY());
 	
 	//leaderPtr->velocityNode.applyVelocity(Vector2(0.0f, -0.02f));
 
@@ -93,6 +124,9 @@ void Physics::UpdatePhysics(float msec)
 	}
 	
 	leader.update(msec);
+	cout << getTileAt(Map::worldToGridPositionX(leader.physicsNode.getPosition().x), Map::worldToGridPositionY(leader.physicsNode.getPosition().y));
+	leader.setTerrainType(getTileAt(Map::worldToGridPositionX(leader.physicsNode.getPosition().x), Map::worldToGridPositionY(leader.physicsNode.getPosition().y)));
+
 	dragon.update(msec);
 
 	//ideally loop through all entities

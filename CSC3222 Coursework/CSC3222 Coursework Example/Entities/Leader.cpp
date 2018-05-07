@@ -16,6 +16,7 @@ void Leader::update(float msec){
 		physicsNode.updateRotation(0.20f * msec);
 	}
 	
+	limitVelocityByTerrain();
 	//alright this is a bit dodgy but we don't want the leader
 	//to execute the follower update logic so
 	//just call entity

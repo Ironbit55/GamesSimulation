@@ -1,7 +1,6 @@
 #include "Follower.h"
 
 void Follower::update(float msec){
-	std::cout << "FOLLOWER UPDATE";
 
 	//this is the same logic as the dragon follow...
 	//I guess we could refactor it into some generic follow behaviour
@@ -22,4 +21,21 @@ void Follower::update(float msec){
 
 
 	Entity::update(msec);
+}
+
+void Follower::limitVelocityByTerrain(){
+	float maxVelocity = 0;
+	switch (terrainType) {
+	case RUBBLE:
+		maxVelocity = feetToPixels(2);
+		break;
+	case WALL:
+		maxVelocity = feetToPixels(0);
+		break;
+	default: //includes floor
+		maxVelocity = feetToPixels(5);
+		break;
+	}
+
+	velocityNode.setMaxSpeed(maxVelocity);
 }
