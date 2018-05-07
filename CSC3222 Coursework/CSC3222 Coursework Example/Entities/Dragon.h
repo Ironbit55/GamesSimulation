@@ -2,7 +2,7 @@
 #include "../Entity.h"
 class Dragon : public Entity{
 public:
-	Dragon(const float rotation = 0.0f) : Entity(25.0f, 50.0f, 50.0f, 1000.0f, 1.0f, -199.5f, rotation){
+	Dragon(const float rotation = 0.0f) : Entity(25.0f, 50.0f, 50.0f, 1000.0f, 1.0f, -199.0f, rotation){
 		physicsNode.setBoundingCircle(30.0f);
 		collidableNode.boundingRadius = 30.0f;
 		collidableNode.isFixed = false;

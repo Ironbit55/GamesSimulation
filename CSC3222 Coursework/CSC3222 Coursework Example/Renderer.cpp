@@ -154,7 +154,7 @@ void Renderer::RenderScene() {
 	glUseProgram(currentShader->GetProgram());
 	UpdateShaderMatrices();
 
-	glUniform1i(glGetUniformLocation(currentShader->GetProgram(), "diffuseTex"), 0);
+	//glUniform1i(glGetUniformLocation(currentShader->GetProgram(), "diffuseTex"), 0);
 
 	DrawNodes();
 
@@ -183,7 +183,7 @@ void	Renderer::BuildNodeLists(SceneNode* from) {
 																//aaalthough wouldn't you want to detect something as behind the camera...
 
 	if (frameFrustum.InsideFrustum(*from)) {
-		if (from->GetColour().w < 1.0f) {
+		if (from->GetColour().w < 0.99f) {
 			transparentNodeList.push_back(from);
 		}
 		else {
@@ -207,7 +207,7 @@ void	Renderer::DrawNodes() {
 }
 
 void	Renderer::SortNodeLists() {
-	std::sort(transparentNodeList.begin(), transparentNodeList.end(), SceneNode::CompareByCameraDistance);
+	std::sort(transparentNodeList.begin(), transparentNodeList.end(), SceneNode::CompareByCameraDistanceReverse);
 	std::sort(nodeList.begin(), nodeList.end(), SceneNode::CompareByCameraDistance);
 }
 

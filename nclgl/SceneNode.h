@@ -64,6 +64,7 @@ public:
 	std::vector<SceneNode*>::const_iterator GetChildIteratorEnd() { return children.end(); }
 
 	static bool		CompareByCameraDistance(SceneNode*a, SceneNode*b);
+	static bool		CompareByCameraDistanceReverse(SceneNode*a, SceneNode*b);
 	static bool		CompareByZ(SceneNode*a, SceneNode*b);
 
 protected:

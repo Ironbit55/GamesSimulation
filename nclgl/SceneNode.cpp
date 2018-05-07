@@ -26,6 +26,10 @@ bool	SceneNode::CompareByCameraDistance(SceneNode*a, SceneNode*b) {
 	return (a->distanceFromCamera < b->distanceFromCamera) ? true : false;
 }
 
+bool	SceneNode::CompareByCameraDistanceReverse(SceneNode*a, SceneNode*b) {
+	return (a->distanceFromCamera < b->distanceFromCamera) ? false : true;
+}
+
 bool	SceneNode::CompareByZ(SceneNode*a, SceneNode*b) {
 	return (a->GetWorldTransform().GetPositionVector().z < b->GetWorldTransform().GetPositionVector().z) ? true : false;
 }
@@ -33,7 +37,7 @@ bool	SceneNode::CompareByZ(SceneNode*a, SceneNode*b) {
 void	SceneNode::Update(float msec) {
 	if (parent) {
 		SetModelScale(physicsNode->getScale());
-		//SetColour(physicsNode->colour);
+		SetColour(physicsNode->colour);
 
 		SetTransform(Matrix4::Translation(physicsNode->getPosition3d())* physicsNode->getQrotation().ToMatrix());
 		
