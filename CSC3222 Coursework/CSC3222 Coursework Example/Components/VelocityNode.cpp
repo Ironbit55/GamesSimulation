@@ -15,14 +15,21 @@ void VelocityNode::update(float msec){
 	velocity = velocity * (drag);
 	//limit velocity accordng to max speed
 
-
+	
 	float currentSpeed = velocity.Length();
-	if (currentSpeed > maxSpeed){
-		velocity.Normalise();
-		velocity *= maxSpeed;
-	}else if(currentSpeed < MIN_VELOCITY){
+	//float dampingFactor = maxSpeed / currentSpeed;
+	velocity *= dampingFactor;
+
+	if(currentSpeed > maxSpeed){
+		//set velocity to max speed
+		velocity *= maxSpeed / currentSpeed;
+	}else if (currentSpeed < MIN_VELOCITY) {
 		velocity = Vector3();
 	}
+
+	//if(currentSpeed < MIN_VELOCITY){
+	//	velocity = Vector3();
+	//}
 
 
 	//uses new velocity to inform new displacement

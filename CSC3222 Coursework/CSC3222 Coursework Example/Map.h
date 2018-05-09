@@ -24,15 +24,18 @@ class Map{
 		static const Vector2 MAP_BOTTOM_LEFT;
 		
 		static int worldToGridPositionX(float positionX) {
-			return (positionX - MAP_BOTTOM_LEFT.x) / GRID_SIZE;
+			return (positionX - MAP_BOTTOM_LEFT.x - 1) / GRID_SIZE;
 		}
 		static int worldToGridPositionY(float positionY){
-			return  (positionY - MAP_BOTTOM_LEFT.y) / GRID_SIZE;
+			return  (positionY - MAP_BOTTOM_LEFT.y + 1) / GRID_SIZE;
 		}
 
 		static Vector2 gridToWorldPosition(const int gridX, const int gridY){
-			return Vector2((gridX * Map::GRID_SIZE) + MAP_BOTTOM_LEFT.x, (gridY * Map::GRID_SIZE) + MAP_BOTTOM_LEFT.y);
+			//just trust me on this
+			return Vector2(((gridX + 1) * Map::GRID_SIZE) + MAP_BOTTOM_LEFT.x, ((gridY - 1) * Map::GRID_SIZE) + MAP_BOTTOM_LEFT.y);
 		}
+
+		
 
 		static TileType charToTile(char charTile);
 

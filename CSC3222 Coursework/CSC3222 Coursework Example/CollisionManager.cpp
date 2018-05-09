@@ -10,15 +10,95 @@ CollisionManager::~CollisionManager()
 {
 }
 
+/*
+ * From: http://doswa.com/2009/07/13/circle-segment-intersectioncollision.html
+ */
+bool CollisionManager::lineCircleCollision(Vector2 lineStart, Vector2 lineEnd, Vector2 circlePos, float circleRadius, CollisionData& collisionDataOut) {
+	Vector2 line = lineEnd - lineStart;
+	float lineLength = line.Length();
+	Vector2 startToCircle = circlePos - lineStart;
+	if(lineLength <= 0){
+		//not a valid line
+		return false;
+	}
+
+	//start by finding point on line closest to circle
+
+
+	//project start to circle vector onto line vector
+	float projVLength = Vector2::Dot(startToCircle, line / lineLength);
+	Vector2 closestPoint = Vector2();
+	//special cases, circle "outside" line
+	if(projVLength < 0){
+		//before start of line
+		closestPoint = lineStart;
+	}else if (projVLength > lineLength){
+		//after end of line
+		closestPoint = lineEnd;
+	}else {
+		//normal case circle centre "inside" line
+		//somewhere between start and end
+		Vector2 projV = Vector2::Normalise(line) * projVLength;
+		closestPoint = projV + lineStart;
+		
+	}
+
+	//found closest point
+	//check whether there is a collision
+	Vector2 circleOriginToClosest = circlePos - closestPoint;
+	float circleOriginToClosestLength = circleOriginToClosest.Length();
+	if(circleOriginToClosestLength > circleRadius){
+		//closest point is outside circle so no itersection
+		return false;
+	}
+
+	//fill collision data
+	collisionDataOut.contactPoint = closestPoint;
+	//we know length so reuse to avoid recalculating it
+	collisionDataOut.contactNormal = circleOriginToClosest / circleOriginToClosestLength;
+	collisionDataOut.peneterationDepth = (circleRadius - circleOriginToClosestLength);
+
+	return true;
+
+
+}
+
+bool CollisionManager::circleCircleCollision(Vector2 pos1, float radius1, Vector2 pos2, float radius2, CollisionData& collisionDataOut){
+	Vector2 originDistance = pos2 - pos1;
+
+
+
+	float penetrationDepth = (radius1 + radius2) - originDistance.Length();
+
+	//on no collision
+	//we don't bother changing collisionDataOut at all...
+	//is this right?
+	if (penetrationDepth < 0.0f) {	//have some floating point tolerence here?
+		return false;
+	}
+
+	//there is an overlap so fill up collision data
+
+	collisionDataOut.contactNormal = Vector2::Normalise(originDistance);
+	collisionDataOut.contactPoint = pos1 + (collisionDataOut.contactNormal * radius2);
+	collisionDataOut.peneterationDepth = penetrationDepth;
+
+	return true;
+}
+
+
 bool CollisionManager::circleCircleCollision(PhysicsNode& c1, PhysicsNode& c2){
 	//cout << "circle-circle collision check" << "\n";
 	
 	
 	Vector2 originDistance = c2.getPosition() - c1.getPosition();
+	
 
 
 	//there is a collision if distance between circle origins is less than the sum of their radiuses
 	return originDistance.Length() < (c1.getBoundingCircle() + c2.getBoundingCircle());
+
+
 	
 }
 
@@ -87,7 +167,12 @@ float CollisionManager::calculateCollisionImpulse(Entity& eA, Entity& eB, Collis
 
 	//the bottom of the impluse equation
 	//don't really know what this represents tbh related to momentum?
-	float momentumPortion = Vector2::Dot(data.contactNormal, data.contactNormal) * (inverseMassA + inverseMassB);
+	float momentumPortion = 1;
+	if(!eB.collidableNode.isFixed && !eB.collidableNode.isFixed) {
+		//if either are fixed we know momentum portion will be 1
+		float momentumPortion = Vector2::Dot(data.contactNormal, data.contactNormal) * (inverseMassA + inverseMassB);
+	}
+	
 
 	float impulse = velocityAlongNormal / momentumPortion;
 

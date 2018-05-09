@@ -11,6 +11,9 @@ class CollisionManager{
 	~CollisionManager();
 	
 public: 
+	bool static lineCircleCollision(Vector2 lineStart, Vector2 lineEnd, Vector2 circlePos, float circleRadius, CollisionData& collisionDataOut);
+	bool static circleCircleCollision(Vector2 pos1, float radius1, Vector2 pos2, float radius2, CollisionData& collisionDataOut);
+
 	bool static circleCircleCollision(PhysicsNode& c1, PhysicsNode& c2);
 
 	bool static entityCircleInterfaceDetection(Entity& e1, Entity& e2, CollisionData& collisionDataOut);

@@ -21,7 +21,7 @@
 
 class VelocityNode{
 public:
-	VelocityNode(PhysicsNode* physicsNode, float maxSpeed, float mass = 1.0f, float d = 0.95f) : physicsNode(physicsNode), mass(mass), maxSpeed(maxSpeed), inverseMass(1.0f / mass), drag(d) {};
+	VelocityNode(PhysicsNode* physicsNode, float maxSpeed, float mass = 1.0f, float d = 0.95f) : physicsNode(physicsNode), mass(mass), maxSpeed(maxSpeed), inverseMass(1.0f / mass), drag(d), dampingFactor(1.0f) {};
 	//~VelocityNode();
 
 	void update(float msec);
@@ -126,12 +126,27 @@ public:
 		return Vector2(velocity.x, velocity.y);
 	}
 
+	Vector2 getPosition() const {
+		return physicsNode->getPosition();
+	}
+
+	void setDampingFactor(const float damping){
+		dampingFactor = damping;
+	}
 	void setMaxSpeed(const float maxSpeed){
 		this->maxSpeed = maxSpeed;
 	}
 
+	float getMaxSpeed(){
+		return maxSpeed;
+	}
+
 	void setPhysicsNode(PhysicsNode* p){
 		physicsNode = p;
+	}
+
+	PhysicsNode* getPhysicsNode(){
+		return physicsNode;
 	}
 
 
@@ -141,9 +156,10 @@ private:
 	float inverseMass;
 	float maxSpeed;
 	float drag;
+	float dampingFactor;
 	Vector3 velocity;
 	Vector3 acceleration;
 	Vector3 force;
-	const float MIN_VELOCITY = 0.001f;
+	const float MIN_VELOCITY = 0.1f;
 };
 

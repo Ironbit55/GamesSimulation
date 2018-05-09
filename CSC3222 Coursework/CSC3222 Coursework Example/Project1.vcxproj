@@ -123,11 +123,13 @@
     <ClCompile Include="Entities\Leader.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
+    <ClCompile Include="MovementManager.cpp" />
     <ClCompile Include="Physics.cpp" />
     <ClCompile Include="Components\PhysicsNode.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Components\RenderNode2D.cpp" />
     <ClCompile Include="Components\VelocityNode.cpp" />
+    <ClCompile Include="Terrain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\CollidableNode.h" />
@@ -137,11 +139,13 @@
     <ClInclude Include="Entities\Follower.h" />
     <ClInclude Include="Entities\Leader.h" />
     <ClInclude Include="Map.h" />
+    <ClInclude Include="MovementManager.h" />
     <ClInclude Include="Physics.h" />
     <ClInclude Include="Components\PhysicsNode.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Components\RenderNode2D.h" />
     <ClInclude Include="Components\VelocityNode.h" />
+    <ClInclude Include="Terrain.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

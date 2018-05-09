@@ -24,18 +24,19 @@ void Follower::update(float msec){
 }
 
 void Follower::limitVelocityByTerrain(){
-	float maxVelocity = 0;
+	float maxVelocity = 5;
+	float targetVelocity = getTerrainVelocity();
+	float baseVelocity = feetToPixels(5);
+	
+	velocityNode.setDampingFactor(targetVelocity / baseVelocity);
+	velocityNode.setMaxSpeed(baseVelocity);
+}
+
+float Follower::getTerrainVelocity() {
 	switch (terrainType) {
 	case RUBBLE:
-		maxVelocity = feetToPixels(2);
-		break;
-	case WALL:
-		maxVelocity = feetToPixels(0);
-		break;
+		return feetToPixels(2);
 	default: //includes floor
-		maxVelocity = feetToPixels(5);
-		break;
+		return feetToPixels(5);
 	}
-
-	velocityNode.setMaxSpeed(maxVelocity);
 }

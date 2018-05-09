@@ -1,10 +1,12 @@
 #pragma once
 #include "../Entity.h"
+#include "../MovementManager.h"
+const float DRAGON_SPEED_FEET = 3;
 class Dragon : public Entity{
 public:
-	Dragon(const float rotation = 0.0f) : Entity(25.0f, 50.0f, 50.0f, 1000.0f, 1.0f, -199.0f, rotation){
-		physicsNode.setBoundingCircle(30.0f);
-		collidableNode.boundingRadius = 30.0f;
+	Dragon(const float rotation = 0.0f) : Entity(25.0f, 50.0f, 50.0f, 1000.0f, 1.0f, -199.0f, rotation), movementManager(velocityNode, collidableNode, feetToPixels(100), feetToPixels(50)){
+		physicsNode.setBoundingCircle(50.0f);
+		collidableNode.boundingRadius = 50.0f;
 		collidableNode.isFixed = false;
 	}
 
@@ -16,8 +18,11 @@ public:
 	};
 
 	void update(float msec) override;
+	void setObstacles(std::vector<Entity>* obstacle);
 
 	Vector2 targetLocation;
 	bool moveToTarget;
+protected:
+	MovementManager movementManager;
 };
 

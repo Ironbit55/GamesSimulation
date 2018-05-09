@@ -22,13 +22,15 @@ public:
 	Vector2 leaderLocation;
 	bool followLeader;
 
-	void setTerrainType(TileType terrain) {
-		terrainType = terrain;
-	}
+	//void setTerrainType(TileType terrain) {
+	//	terrainType = terrain;
+	//}
 
 protected:
-	TileType terrainType;
+	//TileType terrainType;
 
 	void limitVelocityByTerrain();
+
+	float getTerrainVelocity();
 };
 

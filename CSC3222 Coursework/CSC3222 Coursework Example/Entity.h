@@ -49,6 +49,10 @@ public:
 		physicsNode.setRotation(dir);
 	}
 
+	void setColour(Vector4 colour){
+		physicsNode.colour = colour;
+	}
+
 	void setPhysics(){
 		
 	}
@@ -99,6 +103,18 @@ public:
 	void removeCollidableNode();
 
 
+	void setTile(Vector2 origin, TileType terrain) {
+		tileOrigin = origin;
+		terrainType = terrain;
+	};
+
+	void setTerrainType(TileType terrain) {
+		terrainType = terrain;
+	}
+
+
+
+
 	//we will maybe get around to using this eventually
 	//vector<Entity> children;
 protected:
@@ -106,8 +122,12 @@ protected:
 		return (feet  * Map::GRID_SIZE) / 5;
 	}
 
+	TileType terrainType;
+	Vector2 tileOrigin;
+
 private:
 	float aggroRange;
 	int entitiesInRange;
+
 };
 

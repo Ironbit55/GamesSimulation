@@ -5,9 +5,11 @@ struct LeaderController{
 	bool rotateLeft;
 	bool rotateRight;
 	bool moveForward;
+	bool colliding;
 	//const float rotateSpeed = 0.01f;
 };
 
+const int BASE_SPEED_FEET = 5;
 class Leader :
 	public Follower {
 public:

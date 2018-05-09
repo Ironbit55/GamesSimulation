@@ -63,6 +63,10 @@ public:
 		return vec;
 	}
 
+	static float Distance(Vector2 vec1, Vector2 vec2){
+		return (vec2 - vec1).Length();
+	}
+
 	
 	inline float Length() const {
 		return sqrt((x*x) + (y*y));
