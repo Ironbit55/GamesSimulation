@@ -42,6 +42,8 @@ public:
 	Vector3			GetModelScale()		const { return modelScale; }
 	void			SetModelScale(const Vector3 &s) { modelScale = s; }
 
+	void setBaseRotation(float rotation) { this->baseRotation = rotation; }
+
 	void			AddChild(SceneNode* s);
 	bool			RemoveChild(SceneNode* s, bool recursive = true);
 
@@ -74,6 +76,7 @@ public:
 protected:
 	Matrix4		worldTransform;
 	Matrix4		transform;
+	float		baseRotation = 0;
 	SceneNode*	parent;
 	bool		inheritParentTransform = true;
 	float		distanceFromCamera;

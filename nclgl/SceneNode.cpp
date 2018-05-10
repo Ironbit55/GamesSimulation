@@ -44,7 +44,7 @@ void	SceneNode::Update(float msec) {
 		}
 		
 		//we don't want node to inherit depth of parent, not sure how to do this
-		worldTransform = parent->worldTransform * transform;
+		worldTransform = parent->worldTransform * transform  * Matrix4::Rotation(baseRotation, Vector3(0, 0, 1));
 	}
 	else {
 		worldTransform = transform;

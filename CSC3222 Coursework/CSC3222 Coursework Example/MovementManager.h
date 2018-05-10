@@ -83,15 +83,19 @@ public:
 	}
 
 	bool atPathEnd(float radius){
-		if (currentPathLocation != path.size() - 1) return false;
+		if (currentPathLocation != path.size() - 1 || pathDirection < 0) return false;
 
 		return Vector2::Distance(host.getPosition(), path[currentPathLocation]) < radius;
 	}
 
 	bool atPathStart(float radius) {
-		if (currentPathLocation != 0) return false;
+		if (currentPathLocation != 0 || pathDirection > 0) return false;
 
 		return Vector2::Distance(host.getPosition(), path[currentPathLocation]) < radius;
+	}
+
+	int getPathDirection(){
+		return pathDirection;
 	}
 
 protected:

@@ -93,6 +93,7 @@ Renderer::Renderer(Window &parent, Physics* physics) : OGLRenderer(parent) {
 	
 	dragonNode->SetColour(p->dragon.physicsNode.colour);
 	dragonNode->SetTransform(Matrix4::Translation(p->dragon.physicsNode.getPosition3d()) * p->dragon.physicsNode.getQrotation().ToMatrix());
+	dragonNode->setBaseRotation(0);
 	dragonNode->SetModelScale(p->dragon.physicsNode.getScale());
 	dragonNode->SetMesh(dragon);
 	dragonNode->SetBoundingRadius(5.0f);

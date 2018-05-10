@@ -111,17 +111,17 @@ Physics::Physics() : pathfinding(tileMap)
 	map = PhysicsNode(mapPosition, mapScale, -210.0f);
 
 	Vector2 dragonPos = Vector2(-200.0f, 0.0f);
-	dragon = Dragon(dragonPos);
+	dragon = Dragon(dragonPos, 180.0f);
 
 	Vector2 dir = Vector2(0, 1);
 	dir.Normalise();
 	dragon.physicsNode.setRotation(dir);
 	dragonState = 1;
 
-	Vector2 breathPosition = Vector2(0.0f, -50.0f);
+	Vector2 breathPosition = Vector2(0.0f, 50.0f);
 	Vector3 breathScale = Vector3(2.0f, 1.0f, 1.0f);
 	//depth is relative to parent... which probably isn't what we want
-	breath = PhysicsNode(breathPosition, breathScale, -0.3f, 270.0f);
+	breath = PhysicsNode(breathPosition, breathScale, -0.3f, 90.0f);
 
 	breathState = 1;
 }

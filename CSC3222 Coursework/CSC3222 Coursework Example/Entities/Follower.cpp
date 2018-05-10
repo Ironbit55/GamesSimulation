@@ -19,7 +19,15 @@ void Follower::update(float msec){
 			movementManager.applyFollowLeader(leader->velocityNode, feetToPixels(20), feetToPixels(3));
 		}
 	} else if(followPath){
-		followPath = !movementManager.atPathEnd(feetToPixels(1));
+		if(movementManager.atPathEnd(feetToPixels(1))){
+			movementManager.reversePathDirection();
+		}
+		if (movementManager.atPathStart(feetToPixels(1))) {
+			followPath = false;
+			followLeader = true;
+		}
+
+		
 		movementManager.applyFollowPath(feetToPixels(5));
 		if (dragon != nullptr) {
 			movementManager.applyEvade(*dragon);

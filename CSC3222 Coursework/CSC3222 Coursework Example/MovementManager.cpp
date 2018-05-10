@@ -35,7 +35,7 @@ void MovementManager::applyObstacleAvoidance() {
 }
 
 void MovementManager::applyFollowPath(float pathRadius) {
-	addSteeringForce(followPath(pathRadius), 1000.0f);
+	addSteeringForce(followPath(pathRadius), 6.0f);
 }
 
 void MovementManager::applyFollowLeader(VelocityNode& leader, float leaderSightDistance, float leaderBehindDistance){
@@ -228,19 +228,14 @@ Vector2 MovementManager::followPath(float pathRadius) {
 	float distanceToTarget = Vector2::Distance(host.getPosition(), target);
 	if(distanceToTarget <= pathRadius) {
 		//if next target is final target, we want to make sure we get up really close to the target locations
-			
-		if (currentPathLocation == (path.size() - 1)) {
-			currentPathLocation = path.size() - 1;
-		} 
-		if (currentPathLocation == path.size() - 1) {
-			currentPathLocation = path.size() - 1;
-		}else {
-			currentPathLocation += pathDirection;
-		}
+		currentPathLocation += pathDirection;
 
 		if (currentPathLocation < 0) {
 			currentPathLocation = 0;
-		}
+		} else if (currentPathLocation > (path.size() - 1)) {
+			currentPathLocation = path.size() - 1;
+		} 
+
 		
 		
 	}
