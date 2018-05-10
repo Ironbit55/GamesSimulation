@@ -24,6 +24,8 @@
     <ClCompile Include="Components\CollidableNode.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="MovementManager.cpp" />
+    <ClCompile Include="Pathfinding.cpp" />
+    <ClCompile Include="TileMap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Physics.h">
@@ -46,6 +48,8 @@
     <ClInclude Include="Components\CollidableNode.h" />
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="MovementManager.h" />
+    <ClInclude Include="Pathfinding.h" />
+    <ClInclude Include="TileMap.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">

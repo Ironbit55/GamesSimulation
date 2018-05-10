@@ -10,7 +10,7 @@ public:
 	
 	~Terrain();
 
-	Terrain() : Entity(0, Map::GRID_SIZE, Map::GRID_SIZE, 0.0f, 1.0f, -199.9f, 0.0f) {
+	Terrain() : Entity(0, BOUNDING_CIRCLE, BOUNDING_CIRCLE, 0.0f, 1.0f, -199.9f, 0.0f) {
 		physicsNode.setBoundingCircle(BOUNDING_CIRCLE);
 		collidableNode.boundingRadius = BOUNDING_CIRCLE;
 		collidableNode.isFixed = true;

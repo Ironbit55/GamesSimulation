@@ -25,13 +25,19 @@ void MovementManager::applyFlee(Vector2 target) {
 	addSteeringForce(flee(target));
 }
 
-void MovementManager::applyEvade(VelocityNode target) {
+void MovementManager::applyEvade(VelocityNode& target) {
 	addSteeringForce(evade(target));
 }
 
 void MovementManager::applyObstacleAvoidance() {
 	addSteeringForce(obstacleAvoidance(), 5.0f);
 }
+
+void MovementManager::applyFollowLeader(VelocityNode& leader, float leaderSightDistance, float leaderBehindDistance){
+	addSteeringForce(followLeader(leader, leaderSightDistance, leaderBehindDistance), 10.0f);
+}
+
+
 
 Vector2 MovementManager::seek(Vector2 target, float arrivalRadius) {
 	Vector2 desiredVelocity = target - host.getPosition();
@@ -60,7 +66,7 @@ Vector2 MovementManager::flee(Vector2 target) {
 	return fleeForce;
 }
 
-Vector2 MovementManager::evade(VelocityNode target) {
+Vector2 MovementManager::evade(VelocityNode& target) {
 	Vector2 distance = target.getPosition() - host.getPosition();
 	int updatesAhead = distance.Length() / host.getMaxSpeed();
 
@@ -143,8 +149,69 @@ Vector2 MovementManager::obstacleAvoidanceRaycast(Vector2 ahead, Vector2 ahead2)
 		vecProjectionAwayFromContact = 0;
 		away = 0;
 	}
-	return  obstacleCollisionData.contactNormal  * obstacleCollisionData.peneterationDepth * -15.0f;
+	return  obstacleCollisionData.contactNormal  * -80.0f;
 
+}
+
+Vector2 MovementManager::followLeader(VelocityNode& leader, float leaderSightDistance, float leaderBehindDistance) {
+	Vector2 followForce;
+	Vector2 hostV = leader.getVelocity();
+	hostV.Normalise();
+
+	//caldulate ahead point
+
+	//default forward is up in y
+	Vector2 aheadPos = leader.getPosition() + (hostV * leaderBehindDistance);
+	
+	//calculate behind point
+	//can get vector point behind leader based on leaders rotation,
+	//and scale this by velocity
+	Vector3 behindVec = -leader.getPhysicsNode()->getForwardDirection();
+	Vector2 behindPos = leader.getPosition() - (hostV * (leaderBehindDistance));
+	behindPos += Vector2(behindVec.x, behindVec.y) * MIN_LEADER_BEHIND;
+
+	//seek behind point
+	followForce += seek(behindPos, Map::GRID_SIZE * 2);
+
+	//evade ahead point
+	if(Vector2::Distance(aheadPos, host.getPosition()) < leaderSightDistance || Vector2::Distance(leader.getPosition(), host.getPosition()) <= leaderSightDistance){
+		//if host is in leaders line of sight apply evasion
+		followForce += evade(leader) * 2.0f;
+	}
+
+	followForce += seperation() * 1.0f;
+	//apply flock seperation
+	return followForce;
+}
+
+Vector2 MovementManager::seperation() {
+	Vector2 force;
+	int numNeighbours = 0;
+	//should sort by distance...
+	//find all members of flock (excluding self) within radius
+	//get some of vectors between host and neighbour
+	for (auto it = flock.begin(); it != flock.end(); ++it){
+		float distance = Vector2::Distance((*it)->velocityNode.getPosition(), host.getPosition());
+		if (distance > 0.00001f && distance < SEPERATION_RADIUS){
+			force += (*it)->velocityNode.getPosition() - host.getPosition();
+			numNeighbours++;
+		}else{
+			int i = 0;
+			i++;
+		}
+	}
+
+	//get average difference vector
+	//essentially finds a vector towards the centre of mass of the flock within radius
+	if(numNeighbours != 0){ 
+		force = force / numNeighbours;
+		
+	}
+
+	force.Normalise();
+	force = force * MAX_SEPERATION;
+	//invert vector to point away from centre
+	return -force;
 }
 
 bool MovementManager::lineCircleIntersection(Vector2 ahead, Vector2 ahead2, Entity& obstacleEntity, CollisionData& outCollisionData) {

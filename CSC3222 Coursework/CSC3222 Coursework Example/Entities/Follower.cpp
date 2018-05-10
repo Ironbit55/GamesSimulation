@@ -14,12 +14,16 @@ void Follower::update(float msec){
 	toLeaderDir.Normalise();
 	if (followLeader) {
 		//velocityNode.applyVelocity(toLeaderDir, 0.04f);
-		velocityNode.applyForce(toLeaderDir * 100.0f);
+		//velocityNode.applyForce(toLeaderDir * 100.0f);
+		if (leader != nullptr) {
+			movementManager.applyFollowLeader(leader->velocityNode, feetToPixels(20), feetToPixels(3));
+		}
 	} else {
 		velocityNode.setVelocity(Vector2(0.0f, 0.0f));
 	}
-
-
+	movementManager.applyObstacleAvoidance();
+	movementManager.update();
+	limitVelocityByTerrain();
 	Entity::update(msec);
 }
 

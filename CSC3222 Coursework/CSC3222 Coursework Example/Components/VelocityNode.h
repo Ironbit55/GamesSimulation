@@ -22,7 +22,23 @@
 class VelocityNode{
 public:
 	VelocityNode(PhysicsNode* physicsNode, float maxSpeed, float mass = 1.0f, float d = 0.95f) : physicsNode(physicsNode), mass(mass), maxSpeed(maxSpeed), inverseMass(1.0f / mass), drag(d), dampingFactor(1.0f) {};
-	//~VelocityNode();
+	~VelocityNode() {};
+
+	//VelocityNode(const VelocityNode& src) : physicsNode(src.physicsNode), mass(src.mass), inverseMass(src.in)
+	//float inverseMass;
+	//float maxSpeed;
+	//float drag;
+	//float dampingFactor;
+	//Vector3 velocity;
+	//Vector3 acceleration;
+	//Vector3 force;
+	//followers(src.followers), movementManager(velocityNode, collidableNode), leader(src.leader) {
+
+	//};
+
+	VelocityNode operator=(const VelocityNode& rhs) {
+		return VelocityNode(rhs);
+	}
 
 	void update(float msec);
 

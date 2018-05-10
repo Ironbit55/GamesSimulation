@@ -51,9 +51,16 @@ Renderer::Renderer(Window &parent, Physics* physics) : OGLRenderer(parent) {
 
 	raider = Mesh::GenerateQuad();
 
-	raider->SetTexture(SOIL_load_OGL_texture(TEXTUREDIR"raider.png", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, 0));
+	raider->SetTexture(SOIL_load_OGL_texture(TEXTUREDIR"raider_backup.png", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, 0));
 
 	if (!currentShader->LinkProgram() || !raider->GetTexture()) {
+		return;
+	}
+
+	terrainCollider = Mesh::GenerateQuad();
+	terrainCollider->SetTexture(SOIL_load_OGL_texture(TEXTUREDIR"circle_black.png", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, 0));
+	
+	if (!currentShader->LinkProgram() || !terrainCollider->GetTexture()) {
 		return;
 	}
 
@@ -108,6 +115,19 @@ Renderer::Renderer(Window &parent, Physics* physics) : OGLRenderer(parent) {
 		s->SetMesh(raider);
 		s->SetBoundingRadius(5.0f);
 		s->SetPhysicsNode(&(p->raiders.at(i).physicsNode));
+		root->AddChild(s);
+	}
+
+	for (int i = 0; i < p->terrainColliders.size(); ++i) {
+		SceneNode * s = new SceneNode();
+		//Entity& terrainEntity = p->terrainColliders.at(i);
+		
+		s->SetColour(p->terrainColliders.at(i).physicsNode.colour);
+		s->SetTransform(Matrix4::Translation(p->terrainColliders.at(i).physicsNode.getPosition3d()) * p->terrainColliders.at(i).physicsNode.getQrotation().ToMatrix());
+		s->SetModelScale(p->terrainColliders.at(i).physicsNode.getScale());
+		s->SetMesh(terrainCollider);
+		s->SetBoundingRadius(5.0f);
+		s->SetPhysicsNode(&(p->terrainColliders.at(i).physicsNode));
 		root->AddChild(s);
 	}
 

@@ -31,6 +31,7 @@ protected:
 	Mesh*	raider;
 	Mesh*	dragon;
 	Mesh*	breathWeapon;
+	Mesh*	terrainCollider;
 
 	Frustum frameFrustum;
 

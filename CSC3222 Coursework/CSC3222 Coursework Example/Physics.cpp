@@ -5,75 +5,66 @@
 
 bool Physics::loadTileMap() {
 	
-	ifstream mapfile("tileMap.txt");;
-	string empty;
-	if (!mapfile.is_open()){
-		cout << "Unable to open file";
-		return false;
-	}
-
-
-	tileMap = new TileType[Map::TILES_X *  Map::TILES_Y];
-
-	//for (int x = 0; x < Map::TILES_X; x++) {
-	//	tileMap[x] = new char[Map::TILES_Y];
-	//}
-
-	for (int y = 0; y < Map::TILES_Y; y++) {
-		for (int x = 0; x < Map::TILES_X; x++) {
-			char tile;
-			mapfile >> tile;
-
-			TileType tileType = Map::charToTile(tile);
-			tileMap[(y * Map::TILES_X) + x] = tileType;
-			//addTileCollider(x, y, tileType);
-			
-		}
-
-		getline(mapfile, empty);
-	}
-
+	//add terrain colliders
 	for (int y = 0; y < Map::TILES_Y; y++) {
 		for (int x = 0; x < Map::TILES_X; x++) {
 			//add collider based on tile
-			TileType tileType = getTileAt(x, y);
+			TileType tileType = tileMap.getTileAt(x, y);
 			addTileCollider(x, y, tileType);
 		}
 	}
 
 	addBoulderCollider(19, 4, Map::GRID_SIZE * 1);
 	addBoulderCollider(23, 5, Map::GRID_SIZE * .7f, Vector2(Map::GRID_SIZE * 0.5f, Map::GRID_SIZE * 0.5f));
-	addBoulderCollider(8, 10, Map::GRID_SIZE * .5f);
+	addBoulderCollider(31, 9, Map::GRID_SIZE * 1.0f, Vector2(Map::GRID_SIZE * 0.2f, -Map::GRID_SIZE * 0.5f));
+	addBoulderCollider(8, 10, Map::GRID_SIZE * .8f, Vector2(0, 0));
 	addBoulderCollider(8, 13, Map::GRID_SIZE * 2.0f);
 	addBoulderCollider(35, 18, Map::GRID_SIZE * 1.0f, Vector2(0, -Map::GRID_SIZE * 0.5f));
 	addBoulderCollider(10, 23, Map::GRID_SIZE * 1.5f, Vector2(-Map::GRID_SIZE * 0.5f, 0));
-	addBoulderCollider(27, 25, Map::GRID_SIZE * 1.5f, Vector2(-Map::GRID_SIZE * 0.5f, Map::GRID_SIZE * 0.4f));
+	addBoulderCollider(27, 25, Map::GRID_SIZE * 1.5f, Vector2(-Map::GRID_SIZE * 0.5f, Map::GRID_SIZE * 0.1f));
 	addBoulderCollider(34, 29, Map::GRID_SIZE * 1.5f, Vector2(-Map::GRID_SIZE * 0.5f, 0));
 	addBoulderCollider(48, 29, Map::GRID_SIZE * 1.0f);
-	addBoulderCollider(31, 9, Map::GRID_SIZE * 0.5);
 
+	pathfinding.fillGraphFromGrid();
+	std::vector<Node> path;
+	pathfinding.aStarSearch(pathfinding.getGridNodeId(40, 22), pathfinding.getGridNodeId(34, 6), path);
+
+	for (int i = 0; i < path.size(); ++i){
+		addBoulderCollider(path.at(i).id % Map::TILES_X, path.at(i).id / Map::TILES_X, Map::GRID_SIZE *0.5);
+		//addBoulderCollider(Map::TILES_X, Map::TILES_Y, Map::GRID_SIZE *0.5, path.at(i).position);
+	}
+	
+	return true;
 }
-Physics::Physics()
+Physics::Physics() : pathfinding(tileMap)
 {
 	loadTileMap();
 	numRaiders = 15;
 
-	//for (int i = 0; i < numRaiders - 1; i++){
-	//	float tempRotation = i*20.0f;
-	//	Follower tempFollower = Follower(13 + i * 2, 20 - i, tempRotation);
+	//leader = Leader(0, 0, 20.0f);
+	leader.setGridPosition(30, 15);
+	leader.physicsNode.setRotation(Vector2(0, 1));
 
-	//	tempFollower.velocityNode.applyForce(Vector2(0, 1) * 10.0f);
-	//	raiders.push_back(tempFollower);
-	//	raiders.at(i).physicsNode.setRotation(Vector2(-1, 0));
-	//	raiders.at(i).followLeader = true;
-	//}
+	for (int i = 0; i < numRaiders - 1; i++){
+		float tempRotation = i*20.0f;
+		Follower tempFollower(13 + (i * 3) % 8, 20 - (i / 8) * 2, tempRotation); 
+
+		tempFollower.velocityNode.applyForce(Vector2(0, 1) * 10.0f);
+		raiders.push_back(tempFollower);
+		raiders.at(i).physicsNode.setRotation(Vector2(-1, 0));
+		raiders.at(i).followLeader = true;
+		raiders.at(i).setLeader(&leader);
+	}
+
+	for (int i = 0; i < raiders.size(); i++) {
+		raiders.at(i).setFollowers(raiders);
+		raiders.at(i).setObstacles(&terrainColliders);
+	}
 	
 	 //push leader to followers/raider list
 
 	//add leader to raiders
-	leader = Leader(30, 15, 20.0f);
-	leader.physicsNode.setRotation(Vector2(0, 1));
-	leader.leaderControler.moveForward = true;
+
 
 	int testX = Map::worldToGridPositionX(leader.physicsNode.getPositionX());
 	int testY = Map::worldToGridPositionY(leader.physicsNode.getPositionY());
@@ -129,7 +120,7 @@ void Physics::UpdatePhysics(float msec)
 		followerA.lookAt(dragon.physicsNode.getPosition());
 		followerA.leaderLocation = leader.physicsNode.getPosition();
 
-		//followerA.update(msec);
+		followerA.update(msec);
 		followerA.followLeader = true;
 		
 		//check raider raider collision
@@ -145,6 +136,16 @@ void Physics::UpdatePhysics(float msec)
 				CollisionManager::resolveCollision(followerA, followerB, collisionData);
 			}
 		}
+
+		for (auto it = terrainColliders.begin(); it != terrainColliders.end(); ++it) {
+			if (CollisionManager::entityCircleInterfaceDetection(followerA, *it, collisionData)) {
+				CollisionManager::resolveCollision(followerA, *it, collisionData);
+			}
+		}
+
+		if (CollisionManager::entityCircleInterfaceDetection(followerA, leader, collisionData)) {
+			CollisionManager::resolveCollision(followerA, leader, collisionData);
+		}
 	}
 	
 	
@@ -152,9 +153,9 @@ void Physics::UpdatePhysics(float msec)
 	int gridX = Map::worldToGridPositionX(leader.physicsNode.getPosition().x);
 	int gridY = Map::worldToGridPositionY(leader.physicsNode.getPosition().y);
 	Vector2 tileOrigin = Map::gridToWorldPosition(gridX, gridY);
-	leader.setTile(tileOrigin, getTileAt(gridX, gridY));
+	leader.setTile(tileOrigin, tileMap.getTileAt(gridX, gridY));
 
-	for (auto it = boulderColliders.begin(); it != boulderColliders.end(); ++it) {
+	for (auto it = terrainColliders.begin(); it != terrainColliders.end(); ++it) {
 		if (CollisionManager::entityCircleInterfaceDetection(leader, *it, collisionData)) {
 			CollisionManager::resolveCollision(leader, *it, collisionData);
 
@@ -170,7 +171,6 @@ void Physics::UpdatePhysics(float msec)
 			}
 
 			leader.leaderControler.colliding = true;
-			//leader.velocityNode.setVelocity(Vector2());
 		}
 
 		if (CollisionManager::entityCircleInterfaceDetection(dragon, *it, collisionData)) {
@@ -180,7 +180,7 @@ void Physics::UpdatePhysics(float msec)
 
 	leader.update(msec);
 
-	dragon.setObstacles(&boulderColliders);
+	dragon.setObstacles(&terrainColliders);
 	dragon.update(msec);
 
 	//ideally loop through all entities
