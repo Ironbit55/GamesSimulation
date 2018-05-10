@@ -12,7 +12,7 @@ void Pathfinding::fillGraphFromGrid() {
 			node.id = Map::getIndex(x, y);
 			node.position = Map::gridToWorldPosition(x, y);
 			node.walkable = tileMap.isWalkable(x, y);
-			node.priority = -1.0f;
+			node.priority = 0.0f;
 			setGridEdges(x, y, node);
 			
 			graph.push_back(node);

@@ -13,8 +13,9 @@ void MovementManager::update() {
 		}
 
 		host.applyForce(steeringForce);
-		steeringForce = Vector2();
+		
 	}
+	steeringForce = Vector2();
 }
 
 void MovementManager::applySeek(Vector2 target, float arrivalRadius) {
@@ -31,6 +32,10 @@ void MovementManager::applyEvade(VelocityNode& target) {
 
 void MovementManager::applyObstacleAvoidance() {
 	addSteeringForce(obstacleAvoidance(), 5.0f);
+}
+
+void MovementManager::applyFollowPath(float pathRadius) {
+	addSteeringForce(followPath(pathRadius), 1000.0f);
 }
 
 void MovementManager::applyFollowLeader(VelocityNode& leader, float leaderSightDistance, float leaderBehindDistance){
@@ -96,8 +101,8 @@ Vector2 MovementManager::obstacleAvoidance() {
 	
 
 	//raycast front right
-	Vector3 velocityRotatedRight = Matrix4::Rotation(-28, Vector3(0, 0, 1)) * Vector3(Vector2::Normalise(host.getVelocity()));
-	velocityRotatedRight = velocityRotatedRight * 0.8f;
+	Vector3 velocityRotatedRight = Matrix4::Rotation(-30, Vector3(0, 0, 1)) * Vector3(Vector2::Normalise(host.getVelocity()));
+	velocityRotatedRight = velocityRotatedRight * 0.75f;
 
 	lineEnd = host.getPosition() + (Vector2(velocityRotatedRight.x, velocityRotatedRight.y) * dynamicLookahead);
 	lineStart = host.getPosition() + (Vector2(velocityRotatedRight.x, velocityRotatedRight.y) * dynamicLookahead * lineStartRatio);
@@ -112,8 +117,8 @@ Vector2 MovementManager::obstacleAvoidance() {
 	
 
 	//raycast front left
-	Vector3 velocityRotatedLeft = Matrix4::Rotation(28, Vector3(0, 0, 1)) * Vector3(Vector2::Normalise(host.getVelocity()));
-	velocityRotatedLeft = velocityRotatedLeft * 0.8f;
+	Vector3 velocityRotatedLeft = Matrix4::Rotation(30, Vector3(0, 0, 1)) * Vector3(Vector2::Normalise(host.getVelocity()));
+	velocityRotatedLeft = velocityRotatedLeft * 0.75f;
 
 	lineEnd = host.getPosition() + (Vector2(velocityRotatedLeft.x, velocityRotatedLeft.y) * dynamicLookahead);
 	lineStart = host.getPosition() + (Vector2(velocityRotatedLeft.x, velocityRotatedLeft.y) * dynamicLookahead * lineStartRatio);
@@ -139,17 +144,16 @@ Vector2 MovementManager::obstacleAvoidanceRaycast(Vector2 ahead, Vector2 ahead2)
 	}
 
 
-
+	Vector2 avoidForce = Vector2::Normalise(host.getPosition() - nearestObstacle->velocityNode.getPosition());
 	Vector2 vecToObstacleContact = obstacleCollisionData.contactPoint - nearestObstacle->physicsNode.getPosition();
 	vecToObstacleContact.Normalise();
-	float vecProjectionAwayFromContact = Vector2::Dot(host.getVelocity(), obstacleCollisionData.contactNormal);
-	float away = -1.0f;
+	float vecProjectionAwayFromContact = Vector2::Dot(host.getVelocity(), avoidForce);
+	vecProjectionAwayFromContact = -vecProjectionAwayFromContact;
 	if (vecProjectionAwayFromContact < 0.0f) {
 		//if velocity is away from centre then don't bother applying avoidance 
 		vecProjectionAwayFromContact = 0;
-		away = 0;
 	}
-	return  obstacleCollisionData.contactNormal  * -80.0f;
+	return avoidForce * vecProjectionAwayFromContact * 10.0f;
 
 }
 
@@ -212,6 +216,36 @@ Vector2 MovementManager::seperation() {
 	force = force * MAX_SEPERATION;
 	//invert vector to point away from centre
 	return -force;
+}
+
+Vector2 MovementManager::followPath(float pathRadius) {
+	Vector2 force;
+	if(!pathIsSet){
+		return force;
+	}
+
+	Vector2 target = path[currentPathLocation];
+	float distanceToTarget = Vector2::Distance(host.getPosition(), target);
+	if(distanceToTarget <= pathRadius) {
+		//if next target is final target, we want to make sure we get up really close to the target locations
+			
+		if (currentPathLocation == (path.size() - 1)) {
+			currentPathLocation = path.size() - 1;
+		} 
+		if (currentPathLocation == path.size() - 1) {
+			currentPathLocation = path.size() - 1;
+		}else {
+			currentPathLocation += pathDirection;
+		}
+
+		if (currentPathLocation < 0) {
+			currentPathLocation = 0;
+		}
+		
+		
+	}
+
+	return seek(target);
 }
 
 bool MovementManager::lineCircleIntersection(Vector2 ahead, Vector2 ahead2, Entity& obstacleEntity, CollisionData& outCollisionData) {

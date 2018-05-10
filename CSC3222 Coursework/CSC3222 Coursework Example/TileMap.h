@@ -1,5 +1,10 @@
 #pragma once
 #include "../../nclgl/CubeRobot.h"
+struct Point {
+	Point(int x, int y) : x(x), y(y) {};
+	int x;
+	int y;	
+};
 
 class TileMap
 {
@@ -31,13 +36,27 @@ public:
 
 	int getTileWeight(int x, int y){
 		switch (getTileAt(x, y)) {
-			case TileType::FLOOR: return 5;
-			case TileType::RUBBLE: return 2;
-			case TileType::HOARD: return 5;
-			case TileType::POOL: return 5;
+			case TileType::FLOOR: return 10;
+			case TileType::RUBBLE: return 25;
+			case TileType::HOARD: return 10;
+			case TileType::POOL: return 10;
 			default: return 999;
 		}
 	}
+
+	Point getPoolTile(){
+		return Point(45, 20);
+	}
+
+	Point getHoardTile() {
+		return Point(25, Map::TILES_Y - 4);
+	}
+
+	Point posToGrid(Vector2 pos) {
+		return Point(Map::worldToGridPositionX(pos.x), Map::worldToGridPositionY(pos.y));
+		
+	}
+
 
 
 protected:

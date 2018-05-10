@@ -2,6 +2,7 @@
 #include "Physics.h"
 #include "../../nclgl/Window.h"
 #include "CollisionManager.h"
+#include "Renderer.h"
 
 bool Physics::loadTileMap() {
 	
@@ -25,31 +26,65 @@ bool Physics::loadTileMap() {
 	addBoulderCollider(34, 29, Map::GRID_SIZE * 1.5f, Vector2(-Map::GRID_SIZE * 0.5f, 0));
 	addBoulderCollider(48, 29, Map::GRID_SIZE * 1.0f);
 
-	pathfinding.fillGraphFromGrid();
-	std::vector<Node> path;
-	pathfinding.aStarSearch(pathfinding.getGridNodeId(40, 22), pathfinding.getGridNodeId(34, 6), path);
-
-	for (int i = 0; i < path.size(); ++i){
-		addBoulderCollider(path.at(i).id % Map::TILES_X, path.at(i).id / Map::TILES_X, Map::GRID_SIZE *0.5);
-		//addBoulderCollider(Map::TILES_X, Map::TILES_Y, Map::GRID_SIZE *0.5, path.at(i).position);
-	}
+	//addTileCollider(30, 10, TileType::BOULDER);
 	
 	return true;
 }
+
+void Physics::initialse(Renderer* r) {
+	this->renderer = r;
+	pathfinding.fillGraphFromGrid();
+}
+
+void Physics::pathRaiderToPool() {
+	//renderer->deleteAllPaths();
+	int raiderIndex = randInt(0, raiders.size() - 1);
+	Point raiderTile = tileMap.posToGrid(raiders[raiderIndex].velocityNode.getPosition());
+
+	std::vector<Node> path;
+	bool success = pathfinding.aStarSearch(pathfinding.getGridNodeId(raiderTile), pathfinding.getGridNodeId(tileMap.getPoolTile()), path, true);
+	
+	renderer->DrawPath(path, success);
+
+	if (success) {
+		raiders[raiderIndex].setPath(path);
+		raiders[raiderIndex].followLeader = false;
+	}
+
+}
+
+void Physics::pathRaiderToHoard() {
+	//renderer->deleteAllPaths();
+	int raiderIndex = randInt(0, raiders.size() - 1);
+	Point raiderTile = tileMap.posToGrid(raiders[raiderIndex].velocityNode.getPosition());
+
+	std::vector<Node> path;
+	bool success = pathfinding.aStarSearch(pathfinding.getGridNodeId(raiderTile), pathfinding.getGridNodeId(tileMap.getHoardTile()), path, false);
+
+	renderer->DrawPath(path, success);
+
+	if (success) {
+		raiders[raiderIndex].setPath(path);
+		raiders[raiderIndex].followLeader = false;
+	}
+}
+
 Physics::Physics() : pathfinding(tileMap)
 {
 	loadTileMap();
+
+
+
 	numRaiders = 15;
 
 	//leader = Leader(0, 0, 20.0f);
 	leader.setGridPosition(30, 15);
 	leader.physicsNode.setRotation(Vector2(0, 1));
 
-	for (int i = 0; i < numRaiders - 1; i++){
-		float tempRotation = i*20.0f;
-		Follower tempFollower(13 + (i * 3) % 8, 20 - (i / 8) * 2, tempRotation); 
+	for (int i = 0; i < numRaiders; ++i){
+		float tempRotation = 20.0f;
+		Follower tempFollower(13 + ((i % 7) * 2), 20 - (i / 7) * 2, tempRotation);
 
-		tempFollower.velocityNode.applyForce(Vector2(0, 1) * 10.0f);
 		raiders.push_back(tempFollower);
 		raiders.at(i).physicsNode.setRotation(Vector2(-1, 0));
 		raiders.at(i).followLeader = true;
@@ -73,9 +108,8 @@ Physics::Physics() : pathfinding(tileMap)
 
 	Vector2 mapPosition = Vector2(0.0f, 0.0f);
 	Vector3 mapScale = Vector3(Map::MAP_IMAGE_HALF_WIDTH, Map::MAP_IMAGE_HALF_HEIGHT, 100.0f);
-	map = PhysicsNode(mapPosition, mapScale, -200.0f);
+	map = PhysicsNode(mapPosition, mapScale, -210.0f);
 
-	
 	Vector2 dragonPos = Vector2(-200.0f, 0.0f);
 	dragon = Dragon(dragonPos);
 
@@ -88,8 +122,6 @@ Physics::Physics() : pathfinding(tileMap)
 	Vector3 breathScale = Vector3(2.0f, 1.0f, 1.0f);
 	//depth is relative to parent... which probably isn't what we want
 	breath = PhysicsNode(breathPosition, breathScale, -0.3f, 270.0f);
-
-	addTileCollider(30, 10, TileType::BOULDER);
 
 	breathState = 1;
 }
@@ -119,9 +151,11 @@ void Physics::UpdatePhysics(float msec)
 		Follower& followerA = raiders.at(i);
 		followerA.lookAt(dragon.physicsNode.getPosition());
 		followerA.leaderLocation = leader.physicsNode.getPosition();
+		followerA.dragon = &dragon.velocityNode;
 
 		followerA.update(msec);
-		followerA.followLeader = true;
+		
+		//followerA.followLeader = true;
 		
 		//check raider raider collision
 		
@@ -134,6 +168,9 @@ void Physics::UpdatePhysics(float msec)
 				//followerB.followLeader = false;
 				followerB.physicsNode.colour = Vector4(1.0f, 0.5f, 0.2f, 0.999f);
 				CollisionManager::resolveCollision(followerA, followerB, collisionData);
+			}else{
+				//followerA.physicsNode.colour = Vector4(1.0f, 1.0f, 1.0f, 0.999f);
+				//followerB.physicsNode.colour = Vector4(1.0f, 1.0f, 1.0f, 0.999f);
 			}
 		}
 
@@ -143,8 +180,20 @@ void Physics::UpdatePhysics(float msec)
 			}
 		}
 
-		if (CollisionManager::entityCircleInterfaceDetection(followerA, leader, collisionData)) {
-			CollisionManager::resolveCollision(followerA, leader, collisionData);
+		if (CollisionManager::entityCircleInterfaceDetection(leader, followerA, collisionData)) {
+			CollisionManager::resolveCollision(leader, followerA, collisionData);
+			//find projection contact normal onto leader velocity
+			//find component of leader velocity towards (actually away) from contact point
+			float vecProjectionAwayFromContact = Vector2::Dot(collisionData.contactNormal, leader.velocityNode.getVelocity());
+
+
+			if (vecProjectionAwayFromContact < 0.0f) {
+				//if velocity is *towards* contact point
+				//apply the opposite of component of velocity projected onto collison normal
+				leader.velocityNode.applyVelocity(collisionData.contactNormal, vecProjectionAwayFromContact * 30.0f);
+			}
+
+			leader.leaderControler.colliding = true;
 		}
 	}
 	
@@ -264,4 +313,17 @@ void Physics::UpdatePhysics(float msec)
 		breath.addToScaleXY(-2 * shift, -shift);
 	}
 
+	if(Window::GetKeyboard()->KeyTriggered(KEYBOARD_P)){
+		if(renderer != nullptr) {
+			renderer->deleteAllPaths();
+		}
+	}
+
+	if (Window::GetKeyboard()->KeyTriggered(KEYBOARD_J)) {
+		pathRaiderToHoard();
+	}
+
+	if (Window::GetKeyboard()->KeyTriggered(KEYBOARD_L)) {
+		pathRaiderToPool();
+	}
 }

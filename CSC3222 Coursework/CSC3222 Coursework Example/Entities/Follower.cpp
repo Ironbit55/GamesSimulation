@@ -18,12 +18,19 @@ void Follower::update(float msec){
 		if (leader != nullptr) {
 			movementManager.applyFollowLeader(leader->velocityNode, feetToPixels(20), feetToPixels(3));
 		}
-	} else {
-		velocityNode.setVelocity(Vector2(0.0f, 0.0f));
+	} else if(followPath){
+		followPath = !movementManager.atPathEnd(feetToPixels(1));
+		movementManager.applyFollowPath(feetToPixels(5));
+		if (dragon != nullptr) {
+			movementManager.applyEvade(*dragon);
+		}
+	}else{
+		velocityNode.setVelocity(Vector2());
 	}
 	movementManager.applyObstacleAvoidance();
 	movementManager.update();
 	limitVelocityByTerrain();
+	//velocityNode.setMaxSpeed(feetToPixels(10));
 	Entity::update(msec);
 }
 

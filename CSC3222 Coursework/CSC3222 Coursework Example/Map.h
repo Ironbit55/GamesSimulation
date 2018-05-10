@@ -10,6 +10,7 @@ enum TileType {
 	INVALID_TILE,
 
 };
+
 class Map{
 	public:
 		static const int GRID_SIZE;

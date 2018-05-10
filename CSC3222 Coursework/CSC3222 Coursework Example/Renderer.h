@@ -15,7 +15,9 @@ public:
 
 	virtual void UpdateScene(float msec);
 	virtual void RenderScene();
-
+	void	DrawPath(vector<Node>& path, bool success = true);
+	void	deletePath(Node& rootNode);
+	void	deleteAllPaths();
 	Physics* p;
 
 protected:
@@ -25,6 +27,7 @@ protected:
 	void	DrawNodes();
 	void	DrawNode(SceneNode*n);
 
+
 	SceneNode* root;
 	Camera*	camera;
 	Mesh*	map;
@@ -32,6 +35,10 @@ protected:
 	Mesh*	dragon;
 	Mesh*	breathWeapon;
 	Mesh*	terrainCollider;
+	Mesh*	pathNode;
+
+	SceneNode* pathRootNode;
+	std::map<int, SceneNode*> pathRootNodeMap;
 
 	Frustum frameFrustum;
 

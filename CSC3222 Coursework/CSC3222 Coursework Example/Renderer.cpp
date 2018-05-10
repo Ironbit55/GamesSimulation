@@ -64,6 +64,13 @@ Renderer::Renderer(Window &parent, Physics* physics) : OGLRenderer(parent) {
 		return;
 	}
 
+	pathNode = Mesh::GenerateQuad();
+	pathNode->SetTexture(SOIL_load_OGL_texture(TEXTUREDIR"circle_filled.png", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, 0));
+
+	if (!currentShader->LinkProgram() || !pathNode->GetTexture()) {
+		return;
+	}
+
 	/* Declaring our SceneNodes places objects in the environment. We begin with a root note. It you look at the
 	constructor, you'll see it defaults to position 0,0,0 - as such, all SceneNodes which are children of the root note are
 	translated relative to 0,0,0. This framework means we don't really have to worry about this overmuch - so long as our
@@ -130,6 +137,7 @@ Renderer::Renderer(Window &parent, Physics* physics) : OGLRenderer(parent) {
 		s->SetPhysicsNode(&(p->terrainColliders.at(i).physicsNode));
 		root->AddChild(s);
 	}
+	
 
 	SceneNode * s = new SceneNode();
 	s->SetColour(Vector4(1, 1, 1, 0.999));
@@ -193,6 +201,49 @@ void	Renderer::DrawNode(SceneNode*n) {
 		GL_BREAKPOINT
 
 		n->GetMesh()->Draw();
+	}
+}
+
+void Renderer::DrawPath(vector<Node>& path, bool success) {
+	SceneNode * pathRoot = root;
+	if(path.size() < 1){
+		return;
+	}
+
+
+	//root->AddChild(pathRoot);
+	for (int i = 0; i < path.size(); ++i){
+		SceneNode * pathSceneNode = new SceneNode();
+		pathSceneNode->SetColour(Vector4(0, 1, 0, 0.999));
+		if(!success){
+			pathSceneNode->SetColour(Vector4(1, 0, 0, 0.999));
+		}
+		pathSceneNode->SetTransform(Matrix4::Translation(Vector3(path[i].position.x, path[i].position.y, -200.0f)) * Matrix4::Rotation(0, Vector3(0, 0, 1)));
+		pathSceneNode->SetModelScale(Vector3(Map::GRID_SIZE / 4, Map::GRID_SIZE / 4, 10.0f));
+		pathSceneNode->SetMesh(pathNode);
+		pathSceneNode->SetBoundingRadius(5.0f);
+		pathSceneNode->SetPhysicsNode(nullptr);
+		pathSceneNode->setInheritParentTransform(false);
+		if(i ==0){
+			pathRootNodeMap[path[0].id] = pathSceneNode;
+		}
+		pathRoot->AddChild(pathSceneNode);
+		pathRoot = pathSceneNode;
+	}
+}
+
+void Renderer::deletePath(Node& rootNode) {
+	SceneNode s;
+	auto it = pathRootNodeMap.find(rootNode.id);
+	if(it != pathRootNodeMap.end()){
+		//found
+		root->RemoveChild(it->second, true);
+	}
+}
+
+void Renderer::deleteAllPaths() {
+	for (auto it = pathRootNodeMap.begin(); it != pathRootNodeMap.end(); ++it) {
+		root->RemoveChild(it->second);
 	}
 }
 

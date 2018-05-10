@@ -1,22 +1,62 @@
-﻿  Physics.cpp
-c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\map.h(27): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\map.h(30): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+﻿  main.cpp
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\map.h(28): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\map.h(31): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
 c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\components\physicsnode.h(35): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\movementmanager.h(21): warning C4244: 'initializing': conversion from 'int' to 'const float', possible loss of data
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\pathfinding.h(85): warning C4018: '<': signed/unsigned mismatch
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\pathfinding.h(186): warning C4101: 'edges': unreferenced local variable
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\movementmanager.h(22): warning C4244: 'initializing': conversion from 'int' to 'const float', possible loss of data
 c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\terrain.h(4): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\terrain.h(4): warning C4244: 'initializing': conversion from 'double' to 'const float', possible loss of data
-c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\pathfinding.h(55): warning C4018: '<': signed/unsigned mismatch
-c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\pathfinding.h(142): warning C4101: 'edges': unreferenced local variable
+  Renderer.cpp
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\map.h(28): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\map.h(31): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\components\physicsnode.h(35): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\pathfinding.h(85): warning C4018: '<': signed/unsigned mismatch
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\pathfinding.h(186): warning C4101: 'edges': unreferenced local variable
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\movementmanager.h(22): warning C4244: 'initializing': conversion from 'int' to 'const float', possible loss of data
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\terrain.h(4): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\terrain.h(4): warning C4244: 'initializing': conversion from 'double' to 'const float', possible loss of data
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\renderer.cpp(109): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\renderer.cpp(117): warning C4018: '<': signed/unsigned mismatch
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\renderer.cpp(128): warning C4018: '<': signed/unsigned mismatch
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\renderer.cpp(143): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\renderer.cpp(215): warning C4018: '<': signed/unsigned mismatch
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\renderer.cpp(217): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\renderer.cpp(219): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\renderer.cpp(222): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
+  Physics.cpp
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\map.h(28): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\map.h(31): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\components\physicsnode.h(35): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\pathfinding.h(85): warning C4018: '<': signed/unsigned mismatch
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\pathfinding.h(186): warning C4101: 'edges': unreferenced local variable
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\movementmanager.h(22): warning C4244: 'initializing': conversion from 'int' to 'const float', possible loss of data
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\terrain.h(4): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\terrain.h(4): warning C4244: 'initializing': conversion from 'double' to 'const float', possible loss of data
 c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\collisionmanager.h(3): warning C4067: unexpected tokens following preprocessor directive - expected a newline
 c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\collisionmanager.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\physics.cpp(17): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\physics.cpp(32): warning C4018: '<': signed/unsigned mismatch
-c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\physics.cpp(33): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\physics.cpp(59): warning C4018: '<': signed/unsigned mismatch
-c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\physics.cpp(116): warning C4018: '<': signed/unsigned mismatch
-c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\physics.cpp(128): warning C4018: '<': signed/unsigned mismatch
-c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\physics.cpp(199): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\physics.cpp(211): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\physics.cpp(260): warning C4244: 'argument': conversion from 'double' to 'const float', possible loss of data
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\physics.cpp(18): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\physics.cpp(94): warning C4018: '<': signed/unsigned mismatch
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\physics.cpp(148): warning C4018: '<': signed/unsigned mismatch
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\physics.cpp(162): warning C4018: '<': signed/unsigned mismatch
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\physics.cpp(248): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\physics.cpp(260): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\physics.cpp(309): warning C4244: 'argument': conversion from 'double' to 'const float', possible loss of data
+  Leader.cpp
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\map.h(28): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\map.h(31): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\components\physicsnode.h(35): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\pathfinding.h(85): warning C4018: '<': signed/unsigned mismatch
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\pathfinding.h(186): warning C4101: 'edges': unreferenced local variable
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\movementmanager.h(22): warning C4244: 'initializing': conversion from 'int' to 'const float', possible loss of data
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\entities\leader.cpp(12): warning C4244: 'argument': conversion from 'const int' to 'float', possible loss of data
+  Follower.cpp
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\map.h(28): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\map.h(31): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\components\physicsnode.h(35): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\pathfinding.h(85): warning C4018: '<': signed/unsigned mismatch
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\pathfinding.h(186): warning C4101: 'edges': unreferenced local variable
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\movementmanager.h(22): warning C4244: 'initializing': conversion from 'int' to 'const float', possible loss of data
+  Generating Code...
   Project1.vcxproj -> C:\Users\Edward\Documents\GitHubVisualStudio\GamesSimulation\CSC3222 Coursework\Debug\CSC3222 Coursework Framework.exe
   Project1.vcxproj -> C:\Users\Edward\Documents\GitHubVisualStudio\GamesSimulation\CSC3222 Coursework\Debug\CSC3222 Coursework Framework.pdb (Partial PDB)

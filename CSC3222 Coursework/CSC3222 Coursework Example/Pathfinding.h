@@ -2,13 +2,14 @@
 #include "Map.h"
 #include "TileMap.h"
 #include <queue>
+#include <functional>
 
 
 const int MAX_NUM_EDGES = 8;
 struct Edge{
 	int id;
-	int cost;
-	int heuristic;
+	int distanceCost;
+	int weight;
 };
 struct Node{
 	int id;
@@ -28,6 +29,29 @@ struct Node{
 
 };
 
+struct CompNode {
+	bool operator()(Node* n1, Node* n2) {
+		return n1->priority > n2->priority;
+	}
+
+};
+
+//<priority,node>
+typedef std::pair<double, Node*> QueueElement;
+
+struct CompQueueElement {
+	//bool operator()(Node* n1, Node* n2) {
+	//	return n1->priority > n2->priority;
+	//}
+
+	bool operator()(QueueElement& n1, QueueElement& n2) {
+		return n1.first > n2.first;
+	}
+};
+
+
+
+
 class Pathfinding
 {
 public:
@@ -41,25 +65,34 @@ public:
 	int getGridNodeId(int x, int y){
 		return Map::getIndex(x, y);
 	}
+	int getGridNodeId(Point grid){
+		return getGridNodeId(grid.x, grid.y);
+	}
 	
 
 
 	/*
 	 * based off of: https://www.redblobgames.com/pathfinding/a-star/implementation.html
 	 */
-	bool aStarSearch(int startNodeId, int endNodeId, vector<Node>& nodes) {
-		std::priority_queue<Node*, std::vector<Node*>> openQueue;
+	bool aStarSearch(int startNodeId, int endNodeId, vector<Node>& nodes, bool shortestPath = false) {
+		//we need to use a paur to map a node to its latest priority value
+		//in this way we can replace existing nodes by replacing their priority value
+		std::priority_queue<QueueElement, std::vector<QueueElement>, CompQueueElement> openQueue;
 		//index is id of node
+		//basiicaly the closed list
 		int* cameFrom = new int[graph.size()];
 		double* costSoFar = new double[graph.size()];
+
+		//initialse to < 0, so we know when an item hasn't been set
 		for (int i = 0; i < graph.size(); ++i) {
 			cameFrom[i] = -1;
-			costSoFar[i] = -1;
+			costSoFar[i] = 0;
 		}
-
-		openQueue.push(&graph.at(startNodeId));
+		int count = 0;
+		//openQueue.push(&graph.at(startNodeId));
+		openQueue.emplace(0, &graph.at(startNodeId));
 		while (!openQueue.empty()) {
-			Node* currentNode = openQueue.top();
+			Node* currentNode = openQueue.top().second;
 			//remove from open list
 			openQueue.pop();
 
@@ -67,29 +100,32 @@ public:
 				//found end
 				break;
 			}
-
+			count++;
 			for (int i = 0; i < currentNode->edgeCount; ++i) {
-				double newCost = costSoFar[currentNode->id] + currentNode->edges[i].cost;
-				if (costSoFar[currentNode->edges[i].id] < 0 || newCost < costSoFar[currentNode->edges[i].id]) {
-					//cost hasn't been recorded for this not yet, or the new cost is better
+				Node* next = &graph.at(currentNode->edges[i].id);
+				double newCost = costSoFar[currentNode->id] + getCost(currentNode->edges[i], shortestPath);
+				//if (costSoFar[currentNode->edges[i].id] < 0){
+				//	newCost = getCost(currentNode->edges[i], shortestPath);
+				//}
+				
+				if (costSoFar[next->id] < 1 || newCost < costSoFar[next->id]) {
+					
+					//cost hasn't been recorded for this node yet or the new cost is better
 					//so add to closed list
-					costSoFar[currentNode->edges[i].id] = newCost;
-					double priority = currentNode->edges[i].cost + manhattanHeuristic(*currentNode, graph.at(endNodeId));
-					openQueue.push(&graph.at(currentNode->edges[i].id));
+					costSoFar[next->id] = newCost;
+					double priority = newCost + manhattanHeuristic(*next, graph.at(endNodeId));
+					
+					//add or replace node priority value
+					openQueue.emplace(priority, next);
+					//openQueue.push(next);
 					//so we can retrace our steps
-					cameFrom[currentNode->edges[i].id] = currentNode->id;
+					cameFrom[next->id] = currentNode->id;
 				}
 			}
 
 		}
 
 		nodes.clear();
-
-		/*int next = cameFrom[endNodeId];
-		while(next != -1 && next != startNodeId){
-		nodes.push_back(graph.at(next));
-		next = cameFrom[next];
-		}*/
 
 		//get path by retracing steps
 
@@ -99,15 +135,19 @@ public:
 			nodes.push_back(graph.at(next));
 		}
 
+		delete[] cameFrom;
+		delete[] costSoFar;
 		if (next == -1) {
 			return false;
 		} else {
+			//need to add start node
 			nodes.push_back(graph.at(next));
+			//reverse so path is in order of start to end
 			std::reverse(nodes.begin(), nodes.end());
 			return true;
 		}
 
-		//get path by retracing steps
+		
 
 	}
 
@@ -135,6 +175,13 @@ private:
 		return ((gridIndex % 3) + neighbourIndex % 3) + ((gridIndex / 3) + (neighbourIndex / 3) * Map::TILES_X);
 	}
 
+	double getCost(Edge& edge, bool shortestPath = false){
+		if(shortestPath){
+			return edge.distanceCost;
+		}
+		return edge.distanceCost * edge.weight;
+	}
+
 	/*
 	 *
 	 */
@@ -146,21 +193,26 @@ private:
 			for (int x = middleX - 1; x <= middleX + 1; ++x) {
 				if(x != middleX || y != middleY){
 					if (tileMap.isWalkable(x, y)) {
-
+						
 						//Manhattan cost
 						int manhattanCost = abs(x - middleX) + abs(y - middleY);
-						int diaganalCost = 10;
+						int distanceCost = 10;
 						if(x != middleX && y != middleY){
 							//diagonal edge
-							diaganalCost = 14;
+							distanceCost = 14;
+							if (!tileMap.isWalkable(x - (x - middleX), y) || !tileMap.isWalkable(x, y - (y - middleY))){
+								//to be able to walk diagonally, both neighbours of diagonal must be walkable
+								continue;;
+							}
 						}
 						int weight = tileMap.getTileWeight(x, y);
 						//scale this by terrain cost
 						node.edges[count].id = Map::getIndex(x, y);
-						node.edges[count].cost = weight * diaganalCost;
+						node.edges[count].distanceCost = distanceCost;
+						node.edges[count].weight = weight;
 						//precompute heuristic cus we can
 						//wait we can't that was a lie
-						node.edges[count].heuristic = manhattanCost;
+						//node.edges[count].heuristic = manhattanCost;
 						node.edgeCount++;
 						count++;
 					}
@@ -174,7 +226,7 @@ private:
 
 	double manhattanHeuristic(Node nodeA, Node nodeB){
 		//alternatively could use id to get grid x, y and compare that
-		return abs(nodeA.position.x - nodeB.position.x) + abs(nodeA.position.y - nodeB.position.x);
+		return abs(nodeA.position.x - nodeB.position.x) + abs(nodeA.position.y - nodeB.position.y);
 	}
 
 	

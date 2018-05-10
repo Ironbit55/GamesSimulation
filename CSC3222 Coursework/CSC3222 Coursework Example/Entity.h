@@ -39,6 +39,7 @@ public:
 	void setEntititiesInRange(const int entitities) { this->entitiesInRange = entitities; }
 
 	void setGridPosition(const int x, const int y) {
+		Vector2 worldPos = Map::gridToWorldPosition(x, y);
 		physicsNode.setPosition(Map::gridToWorldPosition(x, y));
 	}
 

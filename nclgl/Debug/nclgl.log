@@ -1,10 +1,20 @@
 ﻿  CubeRobot.cpp
-c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\map.h(27): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\map.h(30): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\map.h(28): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\map.h(31): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
 c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\components\physicsnode.h(35): warning C4305: 'argument': truncation from 'double' to 'float'
   Generating Code...
-  Skipping... (no relevant changes detected)
+  Compiling...
   SceneNode.cpp
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\map.h(28): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\map.h(31): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\components\physicsnode.h(35): warning C4305: 'argument': truncation from 'double' to 'float'
   MD5Node.cpp
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\map.h(28): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\map.h(31): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\components\physicsnode.h(35): warning C4305: 'argument': truncation from 'double' to 'float'
   Frustum.cpp
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\map.h(28): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\map.h(31): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+c:\users\edward\documents\githubvisualstudio\gamessimulation\csc3222 coursework\csc3222 coursework example\components\physicsnode.h(35): warning C4305: 'argument': truncation from 'double' to 'float'
+  Generating Code...
   nclgl.vcxproj -> C:\Users\Edward\Documents\GitHubVisualStudio\GamesSimulation\CSC3222 Coursework\Debug\nclgl.lib

@@ -35,11 +35,13 @@ bool	SceneNode::CompareByZ(SceneNode*a, SceneNode*b) {
 }
 
 void	SceneNode::Update(float msec) {
-	if (parent) {
-		SetModelScale(physicsNode->getScale());
-		SetColour(physicsNode->colour);
+	if (parent && inheritParentTransform) {
+		if (physicsNode != nullptr) {
+			SetModelScale(physicsNode->getScale());
+			SetColour(physicsNode->colour);
 
-		SetTransform(Matrix4::Translation(physicsNode->getPosition3d())* physicsNode->getQrotation().ToMatrix());
+			SetTransform(Matrix4::Translation(physicsNode->getPosition3d())* physicsNode->getQrotation().ToMatrix());
+		}
 		
 		//we don't want node to inherit depth of parent, not sure how to do this
 		worldTransform = parent->worldTransform * transform;

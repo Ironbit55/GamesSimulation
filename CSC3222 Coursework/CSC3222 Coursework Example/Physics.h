@@ -12,6 +12,7 @@
 #include "Pathfinding.h"
 
 
+class Renderer;
 using std::vector;
 
 
@@ -40,9 +41,15 @@ public:
 		
 	}
 
+	void initialse(Renderer* renderer);
+
+	void pathRaiderToPool();
+	void pathRaiderToHoard();
+
 	PhysicsNode map;
 	Dragon dragon;
 	PhysicsNode breath;
+	Renderer* renderer;
 	vector<Follower> raiders;
 	vector<Entity> terrainColliders;
 	vector<Terrain> wallColliders;
@@ -78,6 +85,10 @@ protected:
 		terrainColliders.at(terrainColliders.size() - 1).physicsNode.move(offset);
 		terrainColliders.at(terrainColliders.size() - 1).physicsNode.setScaleXY(boundingRadius, boundingRadius);
 		terrainColliders.at(terrainColliders.size() - 1).setColour(Vector4(1, 0, 0, 0.99f));
+	}
+
+	int randInt(int min, int max) {
+		return rand() % max + min;
 	}
 
 	

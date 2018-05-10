@@ -8,7 +8,7 @@ class Follower :
 	public Entity
 {
 public:
-	Follower(const float rotation = 0.0f) : Entity(0.0f, 10.0f, 10.0f, 1000.0f, 1.0f, -199.9f, rotation), movementManager(velocityNode, collidableNode){
+	Follower(const float rotation = 0.0f) : Entity(0.0f, 10.0f, 10.0f, 1000.0f, 1.0f, -199.9f, rotation), movementManager(velocityNode, collidableNode, feetToPixels(10)){
 		//physicsNode.setBoundingCircle(4.0f);
 		collidableNode.boundingRadius = 9.0f;
 		collidableNode.isFixed = false;
@@ -33,6 +33,7 @@ public:
 	virtual void update(float msec);
 
 	Vector2 leaderLocation;
+	VelocityNode* dragon;
 	bool followLeader;
 
 	void setFollowers(std::vector<Follower>& followers) {
@@ -52,6 +53,11 @@ public:
 		movementManager.addObstacles(obstacles);
 	}
 
+	void setPath(std::vector<Node>& path){
+		followPath = true;
+		movementManager.setPath(path);
+	}
+
 	//void setTerrainType(TileType terrain) {
 	//	terrainType = terrain;
 	//}
@@ -68,6 +74,7 @@ protected:
 	MovementManager movementManager;
 
 	Entity* leader;
+	bool followPath = false;
 };
 
 

@@ -12,6 +12,7 @@ int main() {
 
 	Physics physics;
 	Renderer renderer(w, &physics);
+	physics.initialse(&renderer);
 	
 	if (!renderer.HasInitialised()) {
 		return -1;
@@ -25,6 +26,8 @@ int main() {
 		physics.UpdatePhysics(msec);
 		renderer.UpdateScene(msec);
 		renderer.RenderScene();
+
+
 	}
 
 	return 0;

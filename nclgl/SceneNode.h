@@ -45,6 +45,10 @@ public:
 	void			AddChild(SceneNode* s);
 	bool			RemoveChild(SceneNode* s, bool recursive = true);
 
+	void			setInheritParentTransform(bool inherit){
+		inheritParentTransform = inherit;
+	}
+
 	float			GetBoundingRadius() const { return boundingRadius; }
 	void			SetBoundingRadius(float f) { boundingRadius = f; }
 
@@ -71,6 +75,7 @@ protected:
 	Matrix4		worldTransform;
 	Matrix4		transform;
 	SceneNode*	parent;
+	bool		inheritParentTransform = true;
 	float		distanceFromCamera;
 	float		boundingRadius;
 	Vector4		colour;
